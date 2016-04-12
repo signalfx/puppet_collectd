@@ -18,7 +18,7 @@ With this module, you can also configure collectd plugins like collectd-rabbitmq
 
 ## Setup
 ```puppet
-puppet module install signalfx/collectd (not released on PuppetForge yet!)
+puppet module install signalfx/collectd
 ```
 
 ### What collectd affects
@@ -53,6 +53,7 @@ write_queue_limit_high | WriteQueueLimitHigh of the collectd.conf file
 write_queue_limit_low | WriteQueueLimitLow of the collectd.conf file
 collect_internal_stats | CollectInternalStats of the collectd.conf file
 log_file | The location of log file to be used by collectd
+log_level | The log level to be used by collectd
 write_http_timeout | Timeout option of write_http plugin
 write_http_buffersize | BufferSize option of write_http plugin
 write_http_flush_interval | FlushInterval option of write_http plugin

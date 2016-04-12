@@ -16,6 +16,7 @@ class collectd (
     $write_queue_limit_low             = $collectd::params::write_queue_limit_low,
     $collect_internal_stats            = $collectd::params::collect_internal_stats,
     $log_file                          = $collectd::params::log_file,
+    $log_level                         = $collectd::params::log_level,
     # write_http parameters
     $dimension_list                    = $collectd::params::dimension_list,
     $aws_integration                   = $collectd::params::aws_integration,

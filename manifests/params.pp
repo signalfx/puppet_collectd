@@ -10,7 +10,7 @@ class collectd::params {
         $write_queue_limit_low  = 400000
         $collect_internal_stats = true
         $log_file               = '/var/log/signalfx-collectd.log'
-        
+        $log_level              = 'info'
         $ensure_signalfx_plugin_version = present
         $dimension_list            = {}
         $signalfx_api_endpoint     = 'https://ingest.signalfx.com/v1/collectd'
@@ -42,7 +42,7 @@ class collectd::params {
           $plugin_config_dir          = '/etc/collectd.d/managed_config'
           $collectd_config_file       = '/etc/collectd.conf'
           $filtering_config_file      = '/etc/collectd.d/filtering_config/filtering.conf'
-          $mysql_socket_file           = '/var/lib/mysql/mysql.sock'
+          $mysql_socket_file          = '/var/lib/mysql/mysql.sock'
         }
         
         case $::operatingsystem {

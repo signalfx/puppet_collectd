@@ -46,7 +46,7 @@ CollectInternalStats <%= @collect_internal_stats %>
 LoadPlugin logfile
 
 <Plugin logfile>
-  LogLevel "info"
+  LogLevel "<%= @log_level %>"
   File "<%= @log_file %>"
   Timestamp true
   PrintSeverity false
