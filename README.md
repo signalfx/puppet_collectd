@@ -1,6 +1,6 @@
 # puppet_collectd
 
-[![Build Status](https://travis-ci.org/signalfx/puppet_install_collectd.svg?branch=master)](https://travis-ci.org/signalfx/puppet_install_collectd)
+[![Build Status](https://travis-ci.org/signalfx/puppet_collectd.svg?branch=master)](https://travis-ci.org/signalfx/puppet_collectd)
 
 #### Table of Contents
 
@@ -125,7 +125,8 @@ class { 'collectd::plugins::rabbitmq' :
       'CollectConnections' => true,
       'CollectExchanges' => true,
       'CollectNodes' => true,
-      'CollectQueues' => true
+      'CollectQueues' => true,
+      'FieldLength' => '1024'
     }
   }
 }
