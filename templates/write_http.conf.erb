@@ -1,0 +1,14 @@
+<LoadPlugin "write_http">
+   FlushInterval 10
+</LoadPlugin>
+<Plugin "write_http">
+    <Node "signalfx">
+        URL "<%= @signalfx_api_endpoint_with_dimensions %>"
+        User "auth"
+        Password "<%= @signalfx_api_token %>"
+        Format "JSON"
+        Timeout <%= @write_http_timeout %>
+        BufferSize <%= @write_http_buffersize %>
+        LogHttpError <%= @write_http_log_http_error %>
+    </Node>
+</Plugin>
