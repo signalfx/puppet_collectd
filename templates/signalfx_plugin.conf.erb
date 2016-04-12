@@ -1,0 +1,16 @@
+LoadPlugin python
+TypesDB "/opt/signalfx-collectd-plugin/types.db.plugin"
+<Plugin python>
+  ModulePath "/opt/signalfx-collectd-plugin"
+  LogTraces <%= @signalfx_plugin_log_traces %>
+  Interactive <%= @signalfx_plugin_interactive %>
+  Import "signalfx_metadata"
+  <Module signalfx_metadata>
+    URL "<%= @signalfx_api_endpoint_with_dimensions %>"
+    Token "<%= @signalfx_api_token %>"
+    Notifications <%= @signalfx_plugin_notifications %>
+    NotifyLevel "<%= @signalfx_plugin_notify_level %>"
+    DPM <%= @signalfx_plugin_dpm %>
+    Utilization <%= @signalfx_plugin_utilization %>
+  </Module>
+</Plugin>
