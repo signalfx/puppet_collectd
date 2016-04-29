@@ -1,0 +1,44 @@
+# Documentation:
+#   https://collectd.org/wiki/index.php/Plugin:PostgreSQL
+
+# System modifications:
+#   Postgresql plugin use PostgreSQL's statistics collector which should be enabled by default.
+#   The flags are 'track_activities' and 'track_counts'
+
+# Config file modifications:
+#   Change the hostname to location of the postgresql host, username and password.
+
+LoadPlugin postgresql
+
+<Plugin postgresql>
+  
+  <% @queries.each do |query, config| -%>
+    <Query <%= query %>>
+      <% config.each do |key, value| -%>
+      <% if key == "Result" -%>
+      <Result>
+        <% value.each do |result_key,result_value| -%>
+        <%= result_key -%> <%= result_value %>
+        <% end -%>
+      </Result>
+      <% else -%>
+      <%= key -%> <%= value %>
+      <% end -%>
+      <% end -%>
+    </Query>
+  <% end -%>
+  
+  <% @databases.each do |database, config| -%>
+	<Database <%= database %>>
+	  <% config.each do |key, value| -%>
+	  <% if key == "Query" -%>
+	  <% Array(value).each do |query| -%>
+	  Query <%= query %>
+	  <% end -%>
+	  <% else -%>
+	  <%= key -%> <%= value %>
+	  <% end -%>
+	  <% end -%>
+	</Database>
+  <% end -%>
+</Plugin>

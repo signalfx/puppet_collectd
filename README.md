@@ -70,10 +70,123 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
- 1. [Elasticsearch](#class-collectdpluginelasticsearch)
- 2. [MySQL](#class-collectdpluginmysql)
- 3. [RabbitMQ](#class-collectdpluginrabbitmq)
- 4. [Redis](#class-collectdpluginredis)
+ 1. [ActiveMQ](#class-collectdpluginactivemq)
+ 2. [Apache](#class-collectdpluginapache)
+ 2. [Cassandra](#class-collectdplugincassandra)
+ 3. [Docker](#class-collectdplugindocker)
+ 4. [Elasticsearch](#class-collectdpluginelasticsearch)
+ 5. [Kafka](#class-collectdpluginkafka)
+ 6. [Memcached](#class-collectdpluginmemcached)
+ 7. [Mesos-Master](#class-collectdmesos_master)
+ 8. [Mesos-Slave](#class-collectdpluginmesos_slave)
+ 9. [MongoDB](#class-collectdpluginmongodb)
+ 10. [MySQL](#class-collectdpluginmysql)
+ 11. [Nginx](#class-collectdpluginnginx)
+ 12. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 13. [Redis](#class-collectdpluginredis)
+ 14. [Varnish](#class-collectdpluginvarnish)
+ 15. [Zookeeper](#class-collectdpluginzookeeper)
+
+####Class: `collectd::plugin::activemq`
+
+```puppet
+class { 'collectd::plugins::activemq':
+  connections => {
+    'cassandra-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi"',
+      'Host'       => '"ActiveMQ_Host1[hostHasService=activemq]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"activemq-broker"',
+        '"activemq-queue"',
+        '"activemq-topic"']
+    }
+  }
+}
+```
+
+Use [collectd-activemq](https://github.com/signalfx/integrations/tree/master/collectd-activemq) as a guide to configure this plugin.
+
+####Class: `collectd::plugin::apache`
+
+```puppet
+class { 'collectd::plugins::apache':
+  instances => {
+    'myapacheinstance' => {
+       'URL' => '"http://localhost/mod_status?auto"'
+    }
+  }
+}
+```
+
+Use [collectd-apache](https://github.com/signalfx/integrations/tree/master/collectd-apache) as a guide to configure this plugin.
+
+####Class: `collectd::plugin::cassandra`
+
+```puppet
+class { `collectd::plugin::cassandra` :
+  connections => {
+    'cassandra-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7199/jmxrmi"',
+      'Host'       => '"<%= @hostname %>[hostHasService=cassandra]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"cassandra-client-read-latency"',
+        '"cassandra-client-read-timeouts"',
+        '"cassandra-client-read-unavailables"',
+        '"cassandra-client-rangeslice-latency"',
+        '"cassandra-client-rangeslice-timeouts"',
+        '"cassandra-client-rangeslice-unavailables"',
+        '"cassandra-client-write-latency"',
+        '"cassandra-client-write-timeouts"',
+        '"cassandra-client-write-unavailables"',
+        '"cassandra-storage-load"',
+        '"cassandra-storage-hints"',
+        '"cassandra-storage-hints-in-progress"',
+        '"cassandra-compaction-pending-tasks"',
+        '"cassandra-compaction-total-completed"']
+    }
+  }
+}
+```
+
+Use [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/collectd-cassandra) as a guide to configure this plugin
+
+####Class: `collectd::plugin::docker`
+
+```puppet
+class { 'collectd::plugins::docker':
+  modules => {
+    'dockerhost1' => {
+      'BaseURL' => '"unix://var/run/docker.sock"',
+      'Timeout' => 3
+    }
+  }
+}
+```
+
+Use [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) as a guide to configure this plugin
+
+####Class: `collectd::plugin::kafka`
+
+```puppet
+class { 'collectd::plugins::kafka' :
+  connections => {
+    'kafka-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7099/jmxrmi"',
+      'Host'       => '"<%= @hostname %>[hostHasService=kafka]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"kafka-all-messages"', '"kafka-all-bytes-in"',
+        '"kafka-all-bytes-out"', '"kafka-log-flush"',
+        '"kafka-active-controllers"',
+        '"kafka-underreplicated-partitions"', '"kafka-request-queue"',
+        '"kafka.fetch-consumer.total-time"',
+        '"kafka.fetch-follower.total-time"', '"kafka.produce.total-time"']
+    }
+  }
+}
+```
 
 ####Class: `collectd::plugin::elasticsearch`
 
@@ -90,8 +203,66 @@ class { 'collectd::plugins::elasticsearch':
   }
 }
 ```
-See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
-The sample output file generated would look like [10-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
+
+Use [collectd-elasticsearch](https://github.com/signalfx/integrations/tree/master/collectd-elasticsearch) as a guide to configure this plugin
+
+####Class: `collectd::plugin::memcached`
+
+```puppet
+class { 'collectd::plugins::kafka' :
+  connections => {
+    'kafka-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7099/jmxrmi"',
+      'Host'       => '"<%= @hostname %>[hostHasService=kafka]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"kafka-all-messages"', '"kafka-all-bytes-in"',
+        '"kafka-all-bytes-out"', '"kafka-log-flush"',
+        '"kafka-active-controllers"',
+        '"kafka-underreplicated-partitions"', '"kafka-request-queue"',
+        '"kafka.fetch-consumer.total-time"',
+        '"kafka.fetch-follower.total-time"', '"kafka.produce.total-time"']
+    }
+  }
+}
+```
+
+Use [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) as a guide to configure this plugin
+
+####Class: `collectd::plugin::memcached`
+
+```puppet
+class { 'collectd::plugin::memcached':
+  class { 'collectd::plugins::memcached':
+    instances => {
+      'memcached-1' => {
+        'Host' => '"127.0.0.1"',
+        'Port' => '"11211"'
+      }
+    }
+  }
+}
+```
+
+Use [collectd-memcached](https://github.com/signalfx/integrations/tree/master/collectd-memcached) as a guide to configure this plugin
+
+####Class: `collectd::plugin::mongodb`
+
+```puppet
+class { 'collectd::plugins::mongodb':
+  modules => {
+    'mongodb-1' => {
+      'Host' => '"127.0.0.1"',
+      'Port' => '"27017"',
+      'User' => '""',
+      'Password' => '"password"',
+      'Database' => '"db-prod"'
+    }
+  }
+}
+```
+
+Use [collectd-mongodb](https://github.com/signalfx/integrations/tree/master/collectd-mongodb) as a guide to configure this plugin
 
 ####Class: `collectd::plugin::mysql`
 
@@ -109,8 +280,54 @@ class { 'collectd::plugins::mysql' :
 }
 ```
 
-See [collectd.conf](https://collectd.org/documentation/manpages/collectd.conf.5.shtml) for configurable parameters. 
-The sample output file generated would look like [10-mysql.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-mysql.conf)
+Use [collectd-mysql](https://github.com/signalfx/integrations/tree/master/collectd-mysql) as a guide to configure this plugin
+
+####Class: `collectd::plugin::nginx`
+
+```puppet
+class { 'collectd::plugins::nginx' :
+  config => {
+    'URL' => '"http://localhost:80/nginx_status"'
+  }
+}
+```
+
+Use [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) as a guide to configure this plugin
+
+####Class: `collectd::plugin::postgresql`
+
+```puppet
+class { 'collectd::plugins::postgresql' :
+  class { 'collectd::plugins::postgresql':
+    queries   => {
+      'custom_deadlocks' => {
+        'Statement' => '"SELECT deadlocks as num_deadlocks \
+          FROM pg_stat_database \
+          WHERE datname = $1;"',
+        'Param'     => 'database',
+        'Result'    => {
+          'Type'           => '"pg_xact"',
+          'InstancePrefix' => '"num_deadlocks"',
+          'ValuesFrom'     => '"num_deadlocks"',
+        }
+      }
+    },
+    databases => {
+      'foo' => {
+        'Host'     => '"localhost"',
+        'User'     => '"perf_mon"',
+        'Password' => '"testpw"',
+        'queries'  => ['custom_deadlocks', 'backends', 'transactions',
+          'queries', 'queries_by_table', 'query_plans', 'table_states',
+          'query_plans_by_table', 'table_states_by_tables', 'disk_io',
+          'disk_io_by_table', 'disk_usage']
+      }
+    }
+  }
+}
+```
+
+Use [collectd-postgresql](https://github.com/signalfx/integrations/tree/master/collectd-postgresql) as a guide to configure this plugin
 
 ####Class: `collectd::plugin::rabbitmq`
 
@@ -133,15 +350,14 @@ class { 'collectd::plugins::rabbitmq' :
 }
 ```
 
-See [collectd-rabbitmq](https://github.com/signalfx/collectd-rabbitmq) for configurable parameters. 
-The sample output file generated would look like [10-rabbitmq.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-rabbitmq.conf). Currently, the plugin only monitors one rabbitmq instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple rabbitmq instances.
+Use [collectd-rabbitmq](https://github.com/signalfx/integrations/tree/master/collectd-rabbitmq) as a guide to configure this plugin
 
 ####Class: `collectd::plugin::redis`
 
 ```puppet
 class { 'collectd::plugins::redis' :
   modules => {
-    'instance_redis_master' => {
+    '"instance_redis_master"' => {
       'Host' => '"localhost"',
       'Port' => 6379,
       'Verbose' => 'false',
@@ -186,8 +402,52 @@ class { 'collectd::plugins::redis' :
 }
 ```
 
-See [redis-collectd-plugin](https://github.com/signalfx/redis-collectd-plugin) for configurable parameters. 
-The sample output file generated would look like [10-redis_master.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-redis_master.conf)
+Use [collectd-redis](https://github.com/signalfx/integrations/tree/master/collectd-redis) as a guide to configure this plugin.
+
+####Class: `collectd::plugin::varnish`
+
+```puppet
+class { 'collectd::plugins::varnish':
+  config => {
+    'CollectCache'       => 'true',
+    'CollectConnections' => 'true',
+    'CollectBackend'     => 'true',
+    'CollectSHM'         => 'true',
+    'CollectESI'         => 'true',
+    'CollectFetch'       => 'true',
+    'CollectHCB'         => 'true',
+    'CollectSMA'         => 'true',
+    'CollectSMS'         => 'true',
+    'CollectSM'          => 'true',
+    'CollectTotals'      => 'true',
+    'CollectWorkers'     => 'true',
+    'CollectUptime'      => 'true',
+    'CollectVCL'         => 'true',
+    'CollectStruct'      => 'true',
+    'CollectObjects'     => 'true',
+    'CollectSession'     => 'true',
+    'CollectVSM'         => 'true'
+  }
+}
+```
+
+Use [collectd-varnish](https://github.com/signalfx/integrations/tree/master/collectd-varnish) as a guide to configure this plugin
+
+####Class: `collectd::plugin::zookeeper`
+
+```puppet
+class { 'collectd::plugins::zookeeper':
+  modules => {
+    'zookeeper-1' => {
+      'Hosts'    => '"localhost"',
+      'Port'     => '2181',
+      'Instance' => '"zk-cluster-0"'
+    }
+  }
+}
+```
+
+Use [collectd-zookeeper](https://github.com/signalfx/integrations/tree/master/collectd-zookeeper) as a guide to configure this plugin
 
 ## Limitations
 

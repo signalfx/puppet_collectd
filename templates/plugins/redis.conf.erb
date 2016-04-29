@@ -28,7 +28,7 @@
   Import "redis_info"
   <% @modules.each do |instance, config| -%>
   <Module redis_info>
-    Instance "<%= instance -%>"
+    Instance <%= instance -%>
     <% config.each do |key, value| -%>
     <%= key -%> <%= value %>
     <% end -%>
