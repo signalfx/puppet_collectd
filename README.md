@@ -187,6 +187,27 @@ class { 'collectd::plugins::elasticsearch':
 
 Use [collectd-elasticsearch](https://github.com/signalfx/integrations/tree/master/collectd-elasticsearch) as a guide to configure this plugin
 
+####Class: `collectd::plugin::memcached`
+
+```puppet
+class { 'collectd::plugins::kafka' :
+  connections => {
+    'kafka-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7099/jmxrmi"',
+      'Host'       => '"<%= @hostname %>[hostHasService=kafka]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"kafka-all-messages"', '"kafka-all-bytes-in"',
+        '"kafka-all-bytes-out"', '"kafka-log-flush"',
+        '"kafka-active-controllers"',
+        '"kafka-underreplicated-partitions"', '"kafka-request-queue"',
+        '"kafka.fetch-consumer.total-time"',
+        '"kafka.fetch-follower.total-time"', '"kafka.produce.total-time"']
+    }
+  }
+}
+```
+
 Use [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) as a guide to configure this plugin
 
 ####Class: `collectd::plugin::memcached`
