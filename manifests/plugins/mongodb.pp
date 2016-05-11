@@ -8,13 +8,13 @@ class collectd::plugins::mongodb (
   include collectd
   
   if $::osfamily == 'RedHat' {
-    exec {'install epel-release': 
+    exec {'install epel-release':
       command => 'yum install -y epel-release',
       before  => Package['python-pip']
     }
   }
   
-  collectd::check_and_install_package { "${title}::python-pip": 
+  collectd::check_and_install_package { "${title}::python-pip":
     package_name => 'python-pip'
   }
   

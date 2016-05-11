@@ -94,21 +94,20 @@ class collectd::params {
                         $update_system = 'echo print_dummy_yum_update' # do not update amazon os
                         $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-AWS_EC2_Linux-release.repo' # file created in /etc/yum.repos.d
                         $signalfx_plugin_repo_filename = '/etc/yum.repos.d/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release.repo' # file created in /etc/yum.repos.d
+                        $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
+                        $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
                         case $::operatingsystemrelease {
                             '2015.09': {
                                 $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-AWS_EC2_Linux_2015_09-release'
-                                $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
-                                $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
                             }
                             '2015.03': {
                                 $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-AWS_EC2_Linux_2015_03-release'
-                                $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
-                                $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
                             }
                             '2014.09': {
                                 $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-AWS_EC2_Linux_2014_09-release'
-                                $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
-                                $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
+                            }
+                            '2016.03': {
+                                # No old_signalfx_collectd_repo_source on 2016.03
                             }
                             default: {
                               if versioncmp($::facterversion, '1.6.18') <= 0 and $::operatingsystem == 'Amazon' {

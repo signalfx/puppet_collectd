@@ -1,12 +1,12 @@
 # jmx plugin
 #
 class collectd::plugins::jmx {
- 
+  
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
- 
+  
   $typesdbfile = "${collectd::params::plugin_config_dir}/signalfx_types_db"
- 
+
   file { 'Add signalfx typesdb':
     ensure  => present,
     path    => $typesdbfile,
