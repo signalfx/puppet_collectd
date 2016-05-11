@@ -70,7 +70,8 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
- 1. [Apache](#class-collectdpluginapache)
+ 1. [ActiveMQ](#class-collectdpluginactivemq)
+ 2. [Apache](#class-collectdpluginapache)
  2. [Cassandra](#class-collectdplugincassandra)
  3. [Docker](#class-collectdplugindocker)
  4. [Elasticsearch](#class-collectdpluginelasticsearch)
@@ -86,15 +87,33 @@ We allow you to configure parameters to each plugin and they vary widely between
  14. [Varnish](#class-collectdpluginvarnish)
  15. [Zookeeper](#class-collectdpluginzookeeper)
 
+####Class: `collectd::plugin::activemq`
+
+```puppet
+class { 'collectd::plugins::activemq':
+  connections => {
+    'cassandra-1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi"',
+      'Host'       => '"ActiveMQ_Host1[hostHasService=activemq]"',
+      'Collect'    => ['"classes"', '"garbage_collector"',
+        '"memory-heap"', '"memory-nonheap"', '"memory_pool"',
+        '"activemq-broker"',
+        '"activemq-queue"',
+        '"activemq-topic"']
+    }
+  }
+}
+```
+
+Use [collectd-activemq](https://github.com/signalfx/integrations/tree/master/collectd-activemq) as a guide to configure this plugin.
+
 ####Class: `collectd::plugin::apache`
 
 ```puppet
-class { 'collectd::plugins:apache':
-  class { 'collectd::plugins::apache':
-    instances => {
-      'myapacheinstance' => {
-        'URL' => '"http://localhost/mod_status?auto"'
-      }
+class { 'collectd::plugins::apache':
+  instances => {
+    'myapacheinstance' => {
+       'URL' => '"http://localhost/mod_status?auto"'
     }
   }
 }

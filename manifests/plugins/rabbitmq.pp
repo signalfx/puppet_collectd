@@ -14,6 +14,6 @@ class collectd::plugins::rabbitmq (
   collectd::plugins::plugin_common { 'rabbitmq':
     package_name         => 'collectd-python',
     plugin_file_name     => '10-rabbitmq.conf',
-    plugin_template_name => 'rabbitmq/rabbitmq.conf.erb'
+    plugin_template_name => 'rabbitmq.conf.erb'
   }
 }

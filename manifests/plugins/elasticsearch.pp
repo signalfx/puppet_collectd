@@ -14,6 +14,6 @@ class collectd::plugins::elasticsearch (
   collectd::plugins::plugin_common { 'elasticsearch':
     package_name         => 'collectd-python',
     plugin_file_name     => '10-elasticsearch.conf',
-    plugin_template_name => 'elasticsearch/elasticsearch.conf.erb'
+    plugin_template_name => 'elasticsearch.conf.erb'
   }
 }

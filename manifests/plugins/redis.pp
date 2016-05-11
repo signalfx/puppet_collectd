@@ -14,6 +14,6 @@ class collectd::plugins::redis (
   collectd::plugins::plugin_common { 'redis':
     package_name         => 'collectd-python',
     plugin_file_name     => '10-redis.conf',
-    plugin_template_name => 'redis/redis.conf.erb'
+    plugin_template_name => 'redis.conf.erb'
   }
 }
