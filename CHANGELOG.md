@@ -1,3 +1,6 @@
+Release 0.1.2
+  * Fix network unreachable error on non AWS puppetmaster
+
 Release 0.1.1
   * Update version of stdlib to support apt
 
