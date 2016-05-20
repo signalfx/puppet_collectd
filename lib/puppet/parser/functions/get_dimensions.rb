@@ -17,6 +17,8 @@ if aws_integration
                 end
         rescue Timeout::Error
                 puts "ERROR: Unable to get AWS metadata, Timeout due to connecting"
+        rescue
+                puts "ERROR: Unable to get AWS metadata, (may be network is unreachable!)"
         end
         unless response.nil? || response == 0
                 result = JSON.parse(response.body)

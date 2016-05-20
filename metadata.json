@@ -1,6 +1,6 @@
 {
   "name": "signalfx-collectd",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Uday Sagar Shiramshetty",
   "summary": "A puppet module that configures complete collectd from SignalFx",
   "license": "Apache-2.0",
