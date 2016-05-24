@@ -2,7 +2,7 @@
 #
 class collectd::config inherits collectd {
   File {
-    mode   => '0750',
+    mode   => '0755',
     owner  => 'root',
     group  => 'root',
   }
@@ -27,7 +27,6 @@ class collectd::config inherits collectd {
       content => template('collectd/filtering.conf.erb'),
       notify  => Service['collectd'],
   }
-  check_and_create_directory { '/usr/share/' : } ->
   check_and_create_directory { '/usr/share/collectd/' : } ->
   check_and_create_directory { '/usr/share/collectd/java' : } ->
   check_and_create_directory { '/usr/share/collectd/python' : }

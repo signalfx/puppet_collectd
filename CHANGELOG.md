@@ -1,3 +1,7 @@
+Release 0.1.3
+  * Fix file permissions
+  * Revert network unreachable error fix, its not module's error
+
 Release 0.1.2
   * Fix network unreachable error on non AWS puppetmaster
 

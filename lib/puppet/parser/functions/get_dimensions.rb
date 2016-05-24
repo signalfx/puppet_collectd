@@ -14,11 +14,13 @@ if aws_integration
                         response = http.request(Net::HTTP::Get.new(uri.request_uri))
                 rescue Timeout::Error
                        puts "ERROR: Unable to get AWS metadata, Timeout due to reading"
+                rescue Exception
+                       puts "ERROR: Unable to get AWS metadata, exception occurred!"
                 end
         rescue Timeout::Error
                 puts "ERROR: Unable to get AWS metadata, Timeout due to connecting"
-        rescue
-                puts "ERROR: Unable to get AWS metadata, (may be network is unreachable!)"
+        rescue Exception
+                puts "ERROR: Unable to get AWS metadata, exception occurred!"
         end
         unless response.nil? || response == 0
                 result = JSON.parse(response.body)
