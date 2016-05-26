@@ -1,3 +1,6 @@
+Release 0.1.4
+  * Support Amazon Linux 2016.03
+
 Release 0.1.3
   * Fix file permissions
   * Revert network unreachable error fix, its not module's error

@@ -30,8 +30,10 @@ class collectd::get_signalfx_repository inherits collectd {
         }
     }
     if $::osfamily == 'Redhat' {
-      package { $collectd::params::old_signalfx_collectd_repo_source:
-        ensure  => absent
+      if $collectd::params::old_signalfx_collectd_repo_source != undef {
+        package { $collectd::params::old_signalfx_collectd_repo_source:
+          ensure  => absent
+        }
       }
       exec { "Add ${collectd::signalfx_collectd_repo_source}, ${collectd::signalfx_plugin_repo_source}":
         command => "yum install -y ${collectd::params::signalfx_collectd_repo_source} ${collectd::params::signalfx_plugin_repo_source}",
