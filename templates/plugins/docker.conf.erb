@@ -18,7 +18,7 @@
 #   the BaseURL to point to your Docker daemon's remote API as needed (for
 #   example: tcp://localhost:2375).
 
-TypesDB "/usr/share/collectd/python/docker-collectd-plugin/dockerplugin_typesdb"
+TypesDB "/usr/share/collectd/python/docker-collectd-plugin/dockerplugin.db"
 LoadPlugin python
 
 <Plugin python>
@@ -33,3 +33,46 @@ LoadPlugin python
   </Module>
   <% end -%>
 </Plugin>
+
+LoadPlugin match_regex
+<Chain "PostCache">
+  <Rule>
+    <Match "regex">
+      Plugin "^docker$"
+    </Match>
+    <Target "jump">
+      Chain "FilterOutDetailedDockerStats"
+    </Target>
+  </Rule>
+
+  Target "write"
+</Chain>
+<Chain "FilterOutDetailedDockerStats">
+  <Rule "CpuUsage">
+    <Match "regex">
+      Type "^cpu.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "MemoryUsage">
+    <Match "regex">
+      Type "^memory.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "NetworkUsage">
+    <Match "regex">
+      Type "^network.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "BlockIO">
+    <Match "regex">
+      Type "^blkio$"
+      TypeInstance "^io_service_bytes_recursive-.*"
+    </Match>
+    Target "return"
+  </Rule>
+
+  Target "stop"
+</Chain>

@@ -161,11 +161,12 @@ class { 'collectd::plugins::docker':
       'BaseURL' => '"unix://var/run/docker.sock"',
       'Timeout' => 3
     }
-  }
+  },
+  pip_name => '/usr/local/bin/pip'
 }
 ```
 
-Use [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) as a guide to configure this plugin
+Puppet needs 'pip' to install Docker plugin dependencies, so please make sure pip is installed on your agents and supply the command name as `pip_name` argument. Use [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) as a guide to configure this plugin. 
 
 ####Class: `collectd::plugin::kafka`
 
