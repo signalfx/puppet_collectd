@@ -1,3 +1,6 @@
+Release 0.1.5
+  * Add mongodb plugin
+
 Release 0.1.4
   * Support Amazon Linux 2016.03
 
