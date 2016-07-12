@@ -93,6 +93,28 @@ class { 'collectd::plugins::elasticsearch':
 See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
 The sample output file generated would look like [10-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
 
+####Class: `collectd::plugin::mongodb`
+
+```puppet
+class { 'collectd::plugins::mongodb' :
+  modules => {
+    'module1' => {
+      'Host' => '"localhost"',
+      'Port' => '"27017"',
+      'User' => '"collectd"',
+      'Password' => '"password"',
+      'Database' => '"db1"',
+    },
+    'module2' => {
+      'Host' => '"localhost"',
+      'Port' => '"27017"',
+      'Database' => '"test"',
+    }
+  }
+}
+```
+See [collectd-mongodb](https://github.com/signalfx/integrations/tree/master/collectd-mongodb) for configurable parameters. 
+
 ####Class: `collectd::plugin::mysql`
 
 ```puppet
