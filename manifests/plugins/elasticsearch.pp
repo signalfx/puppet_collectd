@@ -6,7 +6,7 @@ class collectd::plugins::elasticsearch (
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
-  
+
   collectd::get_from_github { $title:
     localfolder => '/usr/share/collectd/python/collectd-elasticsearch',
     source      => 'https://github.com/signalfx/collectd-elasticsearch'

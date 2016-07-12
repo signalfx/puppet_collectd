@@ -6,7 +6,7 @@ class collectd::config inherits collectd {
     owner  => 'root',
     group  => 'root',
   }
-  
+
   if $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease == '7' {
     $log_file = 'stdout'
   }else {
@@ -15,7 +15,7 @@ class collectd::config inherits collectd {
       before => File[$collectd::params::collectd_config_file]
     }
   }
-  
+
   file { $collectd::params::plugin_config_dir_tree :
       ensure => directory
   } ->

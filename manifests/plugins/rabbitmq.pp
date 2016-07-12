@@ -6,7 +6,7 @@ class collectd::plugins::rabbitmq (
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
-  
+
   collectd::get_from_github { $title:
     localfolder => '/opt/collectd-rabbitmq',
     source      => 'https://github.com/signalfx/collectd-rabbitmq'

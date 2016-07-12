@@ -12,11 +12,11 @@ class collectd::plugins::signalfx(
   $signalfx_plugin_dpm               = $collectd::signalfx_plugin_dpm,
   $signalfx_plugin_utilization       = $collectd::signalfx_plugin_utilization
 ) inherits collectd {
-  
+
   $dimensions = get_dimensions($dimension_list, $aws_integration)
   $signalfx_api_endpoint_with_dimensions = "${signalfx_api_endpoint}${dimensions}"
   notify {"Collectd will transmit metrics to this url: ${signalfx_api_endpoint_with_dimensions}":}
-  
+
   check_and_install_package { 'signalfx-collectd-plugin':
     before  => File['load Signalfx plugin']
   }
@@ -26,7 +26,7 @@ class collectd::plugins::signalfx(
       before       => File['load Signalfx plugin']
     }
   }
-  
+
   file { 'load Signalfx plugin':
     ensure  => present,
     path    => "${collectd::params::plugin_config_dir}/10-signalfx.conf",

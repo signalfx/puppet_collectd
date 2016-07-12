@@ -36,7 +36,7 @@ class collectd (
     $signalfx_plugin_dpm               = $collectd::params::signalfx_plugin_dpm,
     $signalfx_plugin_utilization       = $collectd::params::signalfx_plugin_utilization
 )  inherits collectd::params {
-  
+
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   collectd::check_os_compatibility { $title:
   } ->
@@ -53,6 +53,6 @@ class collectd (
     class { '::collectd::plugins::write_http': } ->
     class { '::collectd::plugins::signalfx': } ->
   anchor { 'collectd::end': }
-  
+
   class { '::collectd::service': }
 }
