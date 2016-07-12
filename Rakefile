@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'puppetlabs_spec_helper/rake_tasks'
 
-task :default => [:lint,
-                  :syntax]
+PuppetLint.configuration.send('disable_140chars')
+
+task :default => [:lint, :syntax]

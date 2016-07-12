@@ -19,14 +19,14 @@ class collectd::params {
         $aws_integration           = true
         $write_http_log_http_error = true
         $write_http_flush_interval = 10
-        
+
         $signalfx_plugin_log_traces        = true
         $signalfx_plugin_interactive       = false
         $signalfx_plugin_notifications     = true
         $signalfx_plugin_notify_level      = 'OKAY'
         $signalfx_plugin_dpm               = false
         $signalfx_plugin_utilization       = true
-        
+
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {
           $plugin_config_dir_tree      = ['/etc/collectd/', '/etc/collectd/managed_config', '/etc/collectd/filtering_config']
@@ -44,7 +44,7 @@ class collectd::params {
           $filtering_config_file      = '/etc/collectd.d/filtering_config/filtering.conf'
           $mysql_socket_file          = '/var/lib/mysql/mysql.sock'
         }
-        
+
         case $::operatingsystem {
                 'Ubuntu':{
                     $update_system = 'apt-get update -y'

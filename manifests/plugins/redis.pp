@@ -6,7 +6,7 @@ class collectd::plugins::redis (
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
-  
+
   collectd::get_from_github { $title:
     localfolder => '/opt/redis-collectd-plugin',
     source      => 'https://github.com/signalfx/redis-collectd-plugin'
