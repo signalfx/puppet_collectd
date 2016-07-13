@@ -70,13 +70,29 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
- 1. [Docker](#class-collectdplugindocker)
- 2. [Elasticsearch](#class-collectdpluginelasticsearch)
- 3. [MongoDB](#class-collectdpluginmongodb)
- 4. [MySQL](#class-collectdpluginmysql)
- 5. [RabbitMQ](#class-collectdpluginrabbitmq)
- 6. [Redis](#class-collectdpluginredis)
+ 1. [Apache](#class-collectdpluginapache)
+ 2. [Docker](#class-collectdplugindocker)
+ 3. [Elasticsearch](#class-collectdpluginelasticsearch)
+ 4. [MongoDB](#class-collectdpluginmongodb)
+ 5. [MySQL](#class-collectdpluginmysql)
+ 6. [Nginx](#class-collectdpluginnginx)
+ 7. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 8. [Redis](#class-collectdpluginredis)
 
+
+####Class: `collectd::plugin::apache`
+
+```apache
+class { 'collectd::plugins::apache':
+  instances => {
+    'myinstance' => {
+        'URL' => '"http://localhost/mod_status?auto"',
+    }
+  }
+}
+```
+
+See [collectd-apache](https://github.com/signalfx/integrations/tree/master/collectd-apache) for configurable parameters and apache configuration instructions. 
 
 ####Class: `collectd::plugin::docker`
 
@@ -152,6 +168,18 @@ class { 'collectd::plugins::mysql' :
 
 See [collectd.conf](https://collectd.org/documentation/manpages/collectd.conf.5.shtml) for configurable parameters. 
 The sample output file generated would look like [10-mysql.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-mysql.conf)
+
+####Class: `collectd::plugin::nginx`
+
+```nginx
+class { 'collectd::plugins::nginx':
+  'config' => {
+    'URL'  => '"http://localhost:80/nginx_status"',
+  }
+}
+```
+
+See [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) for configurable parameters and nginx configuration instructions. 
 
 ####Class: `collectd::plugin::rabbitmq`
 
