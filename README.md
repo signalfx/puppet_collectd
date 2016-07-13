@@ -70,10 +70,29 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
- 1. [Elasticsearch](#class-collectdpluginelasticsearch)
- 2. [MySQL](#class-collectdpluginmysql)
- 3. [RabbitMQ](#class-collectdpluginrabbitmq)
- 4. [Redis](#class-collectdpluginredis)
+ 1. [Docker](#class-collectdplugindocker)
+ 2. [Elasticsearch](#class-collectdpluginelasticsearch)
+ 3. [MongoDB](#class-collectdpluginmongodb)
+ 4. [MySQL](#class-collectdpluginmysql)
+ 5. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 6. [Redis](#class-collectdpluginredis)
+
+
+####Class: `collectd::plugin::docker`
+
+```docker
+class { 'collectd::plugins::docker':
+  modules => {
+    'dockerplugin' => {
+        'BaseURL'              => '"unix://var/run/docker.sock"',
+        'Timeout'              => '3',
+        'Verbose'              => false
+    }
+  }
+}
+```
+
+See [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) for configurable parameters. 
 
 ####Class: `collectd::plugin::elasticsearch`
 

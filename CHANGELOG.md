@@ -1,4 +1,5 @@
 Release 0.1.5
+  * Add docker plugin
   * Add mongodb plugin
 
 Release 0.1.4
