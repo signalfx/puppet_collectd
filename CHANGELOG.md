@@ -1,6 +1,7 @@
 Release 0.1.5
   * Add docker plugin
   * Add mongodb plugin
+  * Add nginx plugin
 
 Release 0.1.4
   * Support Amazon Linux 2016.03

@@ -74,8 +74,9 @@ We allow you to configure parameters to each plugin and they vary widely between
  2. [Elasticsearch](#class-collectdpluginelasticsearch)
  3. [MongoDB](#class-collectdpluginmongodb)
  4. [MySQL](#class-collectdpluginmysql)
- 5. [RabbitMQ](#class-collectdpluginrabbitmq)
- 6. [Redis](#class-collectdpluginredis)
+ 5. [Nginx](#class-collectdpluginnginx)
+ 6. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 7. [Redis](#class-collectdpluginredis)
 
 
 ####Class: `collectd::plugin::docker`
@@ -152,6 +153,18 @@ class { 'collectd::plugins::mysql' :
 
 See [collectd.conf](https://collectd.org/documentation/manpages/collectd.conf.5.shtml) for configurable parameters. 
 The sample output file generated would look like [10-mysql.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-mysql.conf)
+
+####Class: `collectd::plugin::nginx`
+
+```nginx
+class { 'collectd::plugins::nginx':
+  'config' => {
+    'URL'  => '"http://localhost:80/nginx_status"',
+  }
+}
+```
+
+See [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) for configurable parameters. 
 
 ####Class: `collectd::plugin::rabbitmq`
 
