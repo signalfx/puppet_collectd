@@ -78,6 +78,7 @@ We allow you to configure parameters to each plugin and they vary widely between
  6. [Nginx](#class-collectdpluginnginx)
  7. [RabbitMQ](#class-collectdpluginrabbitmq)
  8. [Redis](#class-collectdpluginredis)
+ 9. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -257,6 +258,20 @@ class { 'collectd::plugins::redis' :
 
 See [redis-collectd-plugin](https://github.com/signalfx/redis-collectd-plugin) for configurable parameters. 
 The sample output file generated would look like [10-redis_master.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-redis_master.conf)
+
+####Class: `collectd::plugin::zookeeper`
+
+```puppet
+class { 'collectd::plugins::zookeeper' :
+  modules => {
+    'module' => {
+      'Hosts' => '"localhost"',
+      'Port' => '2181',
+    }
+  }
+}
+```
+See [collectd-zookeeper](https://github.com/signalfx/integrations/tree/master/collectd-zookeeper) for configurable parameters. 
 
 ## Limitations
 
