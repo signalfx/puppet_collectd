@@ -3,6 +3,7 @@ Release 0.1.5
   * Add docker plugin
   * Add mongodb plugin
   * Add nginx plugin
+  * Add postgresql plugin
   * Add zookeeper plugin
 
 Release 0.1.4

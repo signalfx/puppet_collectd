@@ -70,15 +70,16 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
- 1. [Apache](#class-collectdpluginapache)
- 2. [Docker](#class-collectdplugindocker)
- 3. [Elasticsearch](#class-collectdpluginelasticsearch)
- 4. [MongoDB](#class-collectdpluginmongodb)
- 5. [MySQL](#class-collectdpluginmysql)
- 6. [Nginx](#class-collectdpluginnginx)
- 7. [RabbitMQ](#class-collectdpluginrabbitmq)
- 8. [Redis](#class-collectdpluginredis)
- 9. [Zookeeper](#class-collectdpluginzookeeper)
+ 1.  [Apache](#class-collectdpluginapache)
+ 2.  [Docker](#class-collectdplugindocker)
+ 3.  [Elasticsearch](#class-collectdpluginelasticsearch)
+ 4.  [MongoDB](#class-collectdpluginmongodb)
+ 5.  [MySQL](#class-collectdpluginmysql)
+ 6.  [Nginx](#class-collectdpluginnginx)
+ 7.  [Postgresql](#class-collectdpluginpostgresql)
+ 8.  [RabbitMQ](#class-collectdpluginrabbitmq)
+ 9.  [Redis](#class-collectdpluginredis)
+ 10. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -181,6 +182,36 @@ class { 'collectd::plugins::nginx':
 ```
 
 See [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) for configurable parameters and nginx configuration instructions. 
+
+####Class: `collectd::plugin::postgresql`
+
+```puppet
+class { 'collectd::plugins::postgresql' :
+  databases => {
+    'database1' => {
+      'Host' => '"127.0.0.1"',
+      'User' => '"postgres"',
+      'Password' => '"password"',
+      'queries' => [
+        'custom_deadlocks',
+        'backends',
+        'transactions',
+        'queries',
+        'queries_by_table',
+        'query_plans',
+        'table_states',
+        'query_plans_by_table',
+        'table_states_by_table',
+        'disk_io',
+        'disk_io_by_table',
+        'disk_usage',
+      ]
+    }
+  }
+}
+```
+
+See [collectd-postgresql](https://github.com/signalfx/integrations/tree/master/collectd-postgresql) for configurable parameters. 
 
 ####Class: `collectd::plugin::rabbitmq`
 
