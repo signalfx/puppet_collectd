@@ -71,15 +71,16 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
 
  1.  [Apache](#class-collectdpluginapache)
- 2.  [Docker](#class-collectdplugindocker)
- 3.  [Elasticsearch](#class-collectdpluginelasticsearch)
- 4.  [MongoDB](#class-collectdpluginmongodb)
- 5.  [MySQL](#class-collectdpluginmysql)
- 6.  [Nginx](#class-collectdpluginnginx)
- 7.  [Postgresql](#class-collectdpluginpostgresql)
- 8.  [RabbitMQ](#class-collectdpluginrabbitmq)
- 9.  [Redis](#class-collectdpluginredis)
- 10. [Zookeeper](#class-collectdpluginzookeeper)
+ 2.  [Cassandra](#class-collectdplugincassandra)
+ 3.  [Docker](#class-collectdplugindocker)
+ 4.  [Elasticsearch](#class-collectdpluginelasticsearch)
+ 5.  [MongoDB](#class-collectdpluginmongodb)
+ 6.  [MySQL](#class-collectdpluginmysql)
+ 7.  [Nginx](#class-collectdpluginnginx)
+ 8.  [Postgresql](#class-collectdpluginpostgresql)
+ 9.  [RabbitMQ](#class-collectdpluginrabbitmq)
+ 10. [Redis](#class-collectdpluginredis)
+ 11. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -95,6 +96,43 @@ class { 'collectd::plugins::apache':
 ```
 
 See [collectd-apache](https://github.com/signalfx/integrations/tree/master/collectd-apache) for configurable parameters and apache configuration instructions. 
+
+####Class: `collectd::plugin::cassandra`
+
+```puppet
+class { 'collectd::plugins::cassandra' :
+  connections => {
+    'connection1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7199/jmxrmi"',
+      'Host' => '"testcassandraserver[hostHasService=cassandra]"',
+      'collect_metrics' => [
+        'classes',
+        'garbage_collector',
+        'memory-heap',
+        'memory-nonheap',
+        'memory_pool',
+        'threading',
+        'cassandra-client-read-latency',
+        'cassandra-client-read-timeouts',
+        'cassandra-client-read-unavailables',
+        'cassandra-client-rangeslice-latency',
+        'cassandra-client-rangeslice-timeouts',
+        'cassandra-client-rangeslice-unavailables',
+        'cassandra-client-write-latency',
+        'cassandra-client-write-timeouts',
+        'cassandra-client-write-unavailables',
+        'cassandra-storage-load',
+        'cassandra-storage-hints',
+        'cassandra-storage-hints-in-progress',
+        'cassandra-compaction-pending-tasks',
+        'cassandra-compaction-total-completed',
+      ]
+    }
+  }
+}
+```
+
+See [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/collectd-cassandra) for configurable parameters. 
 
 ####Class: `collectd::plugin::docker`
 

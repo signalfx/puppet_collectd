@@ -1,6 +1,8 @@
 Release 0.1.5
   * Add apache plugin
+  * Add cassandra plugin
   * Add docker plugin
+  * Add java (supporting) plugin
   * Add mongodb plugin
   * Add nginx plugin
   * Add postgresql plugin
