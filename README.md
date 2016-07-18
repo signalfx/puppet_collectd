@@ -75,13 +75,14 @@ We allow you to configure parameters to each plugin and they vary widely between
  3.  [Docker](#class-collectdplugindocker)
  4.  [Elasticsearch](#class-collectdpluginelasticsearch)
  5.  [Kafka](#class-collectdpluginkafka)
- 6.  [MongoDB](#class-collectdpluginmongodb)
- 7.  [MySQL](#class-collectdpluginmysql)
- 8.  [Nginx](#class-collectdpluginnginx)
- 9.  [Postgresql](#class-collectdpluginpostgresql)
- 10. [RabbitMQ](#class-collectdpluginrabbitmq)
- 11. [Redis](#class-collectdpluginredis)
- 12. [Zookeeper](#class-collectdpluginzookeeper)
+ 6.  [Mesos](#class-collectdpluginmesos)
+ 7.  [MongoDB](#class-collectdpluginmongodb)
+ 8.  [MySQL](#class-collectdpluginmysql)
+ 9.  [Nginx](#class-collectdpluginnginx)
+ 10. [Postgresql](#class-collectdpluginpostgresql)
+ 11. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 12. [Redis](#class-collectdpluginredis)
+ 13. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -201,6 +202,24 @@ class { 'collectd::plugins::kafka' :
 ```
 
 See [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) for configurable parameters. 
+
+####Class: `collectd::plugin::mesos`
+
+```puppet
+class { 'collectd::plugins::mesos' :
+  modules => {
+    'mesos-master' => {
+      'Cluster' => '"cluster-0"',
+      'Instance' => '"master-0"',
+      'Path' => '"/usr/sbin"',
+      'Host' => '"localhost"',
+      'Port' => '5050',
+      'Verbose' => 'false',
+    }
+  }
+}
+```
+See [collectd-mesos](https://github.com/signalfx/integrations/tree/master/collectd-mesos) for configurable parameters. 
 
 ####Class: `collectd::plugin::mongodb`
 
