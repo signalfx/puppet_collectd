@@ -9,6 +9,7 @@ Release 0.1.5
   * Add mongodb plugin
   * Add nginx plugin
   * Add postgresql plugin
+  * Update redis plugin
   * Add zookeeper plugin
 
 Release 0.1.4
