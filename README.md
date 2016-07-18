@@ -157,18 +157,23 @@ See [collectd-docker](https://github.com/signalfx/integrations/tree/master/colle
 ```puppet
 class { 'collectd::plugins::elasticsearch':
   modules => {
-    'elasticsearch-1' => {
+    'elasticsearch_collectd' => {
         'Verbose'              => false,
-        'Cluster'              => 'elasticsearch',
+        'Cluster'              => '"elasticsearch"',
         'Indexes'              => '["_all"]',
-        'EnableIndexStats'     => true,
-        'EnableClusterHealth'  => true
+        'EnableIndexStats'     => false,
+        'EnableClusterHealth'  => true,
+        'Interval'             => 10,
+        'IndexInterval'        => 300,
+        'DetailedMetrics'      => false,
+        'ThreadPools'          => '["search","index"]',
+        'AdditionalMetrics'    => '[""]',
     }
   }
 }
 ```
 See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
-The sample output file generated would look like [10-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
+The sample output file generated would look like [20-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
 
 ####Class: `collectd::plugin::kafka`
 
