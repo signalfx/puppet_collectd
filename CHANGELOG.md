@@ -3,6 +3,7 @@ Release 0.1.5
   * Add cassandra plugin
   * Add docker plugin
   * Add java (supporting) plugin
+  * Add kafka plugin
   * Add mongodb plugin
   * Add nginx plugin
   * Add postgresql plugin

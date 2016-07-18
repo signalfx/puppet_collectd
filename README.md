@@ -74,13 +74,14 @@ We allow you to configure parameters to each plugin and they vary widely between
  2.  [Cassandra](#class-collectdplugincassandra)
  3.  [Docker](#class-collectdplugindocker)
  4.  [Elasticsearch](#class-collectdpluginelasticsearch)
- 5.  [MongoDB](#class-collectdpluginmongodb)
- 6.  [MySQL](#class-collectdpluginmysql)
- 7.  [Nginx](#class-collectdpluginnginx)
- 8.  [Postgresql](#class-collectdpluginpostgresql)
- 9.  [RabbitMQ](#class-collectdpluginrabbitmq)
- 10. [Redis](#class-collectdpluginredis)
- 11. [Zookeeper](#class-collectdpluginzookeeper)
+ 5.  [Kafka](#class-collectdpluginkafka)
+ 6.  [MongoDB](#class-collectdpluginmongodb)
+ 7.  [MySQL](#class-collectdpluginmysql)
+ 8.  [Nginx](#class-collectdpluginnginx)
+ 9.  [Postgresql](#class-collectdpluginpostgresql)
+ 10. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 11. [Redis](#class-collectdpluginredis)
+ 12. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -167,6 +168,39 @@ class { 'collectd::plugins::elasticsearch':
 ```
 See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
 The sample output file generated would look like [10-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
+
+####Class: `collectd::plugin::kafka`
+
+```puppet
+class { 'collectd::plugins::kafka' :
+  connections => {
+    'connection1' => {
+      'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7099/jmxrmi"',
+      'Host' => '"testkafkaserver[hostHasService=kafka]"',
+      'collect_metrics' => [
+        'classes',
+        'garbage_collector',
+        'memory-heap',
+        'memory-nonheap',
+        'memory_pool',
+        'threading',
+        'kafka-all-messages',
+        'kafka-all-bytes-in',
+        'kafka-all-bytes-out',
+        'kafka-log-flush',
+        'kafka-active-controllers',
+        'kafka-underreplicated-partitions',
+        'kafka-request-queue',
+        'kafka.fetch-consumer.total-time',
+        'kafka.fetch-follower.total-time',
+        'kafka.produce.total-time',
+      ]
+    }
+  }
+}
+```
+
+See [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) for configurable parameters. 
 
 ####Class: `collectd::plugin::mongodb`
 
