@@ -2,6 +2,7 @@ Release 0.1.5
   * Add apache plugin
   * Add cassandra plugin
   * Add docker plugin
+  * Update elasticsearch plugin
   * Add java (supporting) plugin
   * Add kafka plugin
   * Add mesos (master) plugin
