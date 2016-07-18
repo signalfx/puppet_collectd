@@ -338,7 +338,7 @@ The sample output file generated would look like [10-rabbitmq.conf](https://gith
 ```puppet
 class { 'collectd::plugins::redis' :
   modules => {
-    'instance_redis_master' => {
+    'redis_info' => {
       'Host' => '"localhost"',
       'Port' => 6379,
       'Verbose' => 'false',
@@ -375,9 +375,6 @@ class { 'collectd::plugins::redis' :
       'Redis_connected_slaves' => '"gauge"',
       'Redis_repl_backlog_first_byte_offset' => '"gauge"',
       'Redis_master_repl_offset' => '"gauge"',
-      'Redis_db0_keys' => '"gauge"',
-      'Redis_db0_expires' => '"gauge"',
-      'Redis_db0_avg_ttl' => '"gauge"'
     }
   }
 }
