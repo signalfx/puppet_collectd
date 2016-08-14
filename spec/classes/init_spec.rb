@@ -221,7 +221,7 @@ TypesDB \"/opt/signalfx-collectd-plugin/types.db.plugin\"
 #
 #   https://collectd.org/wiki/index.php/Plugin:Aggregation
 #   https://collectd.org/wiki/index.php/Plugin:Aggregation/Config
-#  
+#
 #   See filtering_config/filtering.conf on filtering out the cpu metrics
 
 # System modifications:
@@ -236,10 +236,10 @@ LoadPlugin aggregation
   <Aggregation>
     Plugin \"cpu\"
     Type \"cpu\"
-    
+
     GroupBy \"Host\"
     GroupBy \"TypeInstance\"
-    
+
     CalculateSum true
     CalculateAverage true
   </Aggregation>

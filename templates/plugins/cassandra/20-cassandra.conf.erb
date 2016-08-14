@@ -25,7 +25,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-read-timeouts">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=Read,name=Timeouts"
 	  <Value>
@@ -34,7 +34,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-read-unavailables">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=Read,name=Unavailables"
 	  <Value>
@@ -43,7 +43,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-rangeslice-latency">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=RangeSlice,name=Latency"
 	  <Value>
@@ -67,7 +67,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-rangeslice-timeouts">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=RangeSlice,name=Timeouts"
 	  <Value>
@@ -76,7 +76,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-rangeslice-unavailables">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=RangeSlice,name=Unavailables"
 	  <Value>
@@ -85,7 +85,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-write-latency">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency"
 	  <Value>
@@ -109,7 +109,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-write-timeouts">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Timeouts"
 	  <Value>
@@ -118,7 +118,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-client-write-unavailables">
 	  ObjectName "org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Unavailables"
 	  <Value>
@@ -127,7 +127,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-storage-load">
 	  ObjectName "org.apache.cassandra.metrics:type=Storage,name=Load"
 	  <Value>
@@ -136,7 +136,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-storage-hints">
 	  ObjectName "org.apache.cassandra.metrics:type=Storage,name=TotalHints"
 	  <Value>
@@ -145,7 +145,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-storage-hints-in-progress">
 	  ObjectName "org.apache.cassandra.metrics:type=Storage,name=TotalHintsInProgress"
 	  <Value>
@@ -154,7 +154,7 @@
 	    Attribute "Count"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-compaction-pending-tasks">
 	  ObjectName "org.apache.cassandra.metrics:type=Compaction,name=PendingTasks"
 	  <Value>
@@ -163,7 +163,7 @@
 	    Attribute "Value"
 	  </Value>
 	</MBean>
-      
+
 	<MBean "cassandra-compaction-total-completed">
 	  ObjectName "org.apache.cassandra.metrics:type=Compaction,name=TotalCompactionsCompleted"
 	  <Value>
@@ -177,7 +177,7 @@
 	<Connection "<%= connection_instance %>">
 	<%- connection_config.each do |key,value| -%>
 	  <%- if key == 'collect_metrics' -%>
-    
+
 	  <%- value.each do |collectname| -%>
 	  Collect "<%= collectname %>"
 	  <%- end -%>
