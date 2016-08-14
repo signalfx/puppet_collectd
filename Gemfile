@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :tests do
   gem 'puppetlabs_spec_helper', :require => false
-  #gem 'nokogiri', '< 1.6.8'
+  gem 'rspec-puppet-facts',     :require => false
 end
 
 group :system_tests do
