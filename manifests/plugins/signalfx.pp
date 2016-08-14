@@ -17,11 +17,11 @@ class collectd::plugins::signalfx(
   $signalfx_api_endpoint_with_dimensions = "${signalfx_api_endpoint}${dimensions}"
   notify {"Collectd will transmit metrics to this url: ${signalfx_api_endpoint_with_dimensions}":}
 
-  check_and_install_package { 'signalfx-collectd-plugin':
+  collectd::check_and_install_package { 'signalfx-collectd-plugin':
     before  => File['load Signalfx plugin']
   }
   if $::osfamily == 'Redhat' {
-    check_and_install_package { $title:
+    collectd::check_and_install_package { $title:
       package_name => 'collectd-python',
       before       => File['load Signalfx plugin']
     }

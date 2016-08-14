@@ -13,7 +13,7 @@ class collectd::plugins::write_http(
   $signalfx_api_endpoint_with_dimensions = "${signalfx_api_endpoint}${dimensions}"
 
   if $::osfamily == 'Redhat' {
-    check_and_install_package { $title :
+    collectd::check_and_install_package { $title :
       package_name => 'collectd-write_http',
       before       => File['load write_http plugin']
     }
