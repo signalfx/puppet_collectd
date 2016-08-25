@@ -6,9 +6,9 @@ LoadPlugin postgresql
         Statement "SELECT deadlocks as num_deadlocks \
             FROM pg_stat_database \
             WHERE datname = $1;"
-  
+
         Param database
-  
+
         <Result>
             Type "pg_xact"
             InstancePrefix "num_deadlocks"

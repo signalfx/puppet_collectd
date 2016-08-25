@@ -27,7 +27,7 @@ class collectd::config inherits collectd {
       content => template('collectd/filtering.conf.erb'),
       notify  => Service['collectd'],
   }
-  check_and_create_directory { '/usr/share/collectd/' : } ->
-  check_and_create_directory { '/usr/share/collectd/java' : } ->
-  check_and_create_directory { '/usr/share/collectd/python' : }
+  collectd::check_and_create_directory { '/usr/share/collectd/' : } ->
+  collectd::check_and_create_directory { '/usr/share/collectd/java' : } ->
+  collectd::check_and_create_directory { '/usr/share/collectd/python' : }
 }

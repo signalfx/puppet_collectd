@@ -4,7 +4,7 @@ define collectd::get_from_github(
   $source
 ) {
   if(!defined(Vcsrepo[$localfolder])){
-    check_and_install_package { $title:
+    collectd::check_and_install_package { $title:
       package_name => 'git'
     } ->
     vcsrepo { $localfolder:

@@ -5,8 +5,9 @@ define collectd::check_os_compatibility {
     fail("Your osfamily : ${::osfamily} is not supported.")
   }
   if $::operatingsystem != 'Debian' and $::operatingsystem != 'Ubuntu' and
-      $::operatingsystem != 'CentOS' and $::operatingsystem != 'Amazon' {
-        fail("Your operating system : ${::operatingsystem} is not supported.")
+      $::operatingsystem != 'CentOS' and $::operatingsystem != 'Amazon' and
+        $::operatingsystem != 'RedHat' {
+    fail("Your operating system : ${::operatingsystem} is not supported.")
   }
   if versioncmp($::facterversion, '1.6.18') <= 0 and
       $::operatingsystem == 'Amazon' {

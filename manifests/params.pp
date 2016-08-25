@@ -70,7 +70,7 @@ class collectd::params {
                         }
                     }
                 }
-                'CentOS': {
+                'RedHat', 'CentOS': {
                     $update_system = 'yum -y update'
                     $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
                     $signalfx_plugin_repo_filename = '/etc/yum.repos.d/SignalFx-collectd_plugin-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
@@ -86,7 +86,7 @@ class collectd::params {
                             $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-centos-release-latest.noarch.rpm'
                         }
                         default: {
-                            fail("Your CentOS OS major release : ${::operatingsystemmajrelease} is not supported.")
+                            fail("Your OS major release : ${::operatingsystemmajrelease} is not supported.")
                         }
                     }
                 }

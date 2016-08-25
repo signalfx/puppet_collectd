@@ -1,0 +1,14 @@
+fixtures:
+  repositories:
+    stdlib:
+      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    concat:
+      repo: https://github.com/puppetlabs/puppetlabs-concat.git
+    apt:
+      repo: https://github.com/puppetlabs/puppetlabs-apt.git
+    git:
+      repo: https://github.com/puppetlabs/puppetlabs-git.git
+    vcsrepo:
+      repo: https://github.com/puppetlabs/puppetlabs-vcsrepo.git
+  symlinks:
+    collectd: "#{source_dir}"

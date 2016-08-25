@@ -1,7 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'puppet-lint'
-gem 'rspec-puppet'
-gem 'puppetlabs_spec_helper'
-gem 'puppet', ENV['PUPPET_VERSION'] || '~> 3.8.0'
+group :tests do
+  gem 'puppetlabs_spec_helper', :require => false
+  gem 'rspec-puppet-facts',     :require => false
+end
+
+group :system_tests do
+  gem 'beaker',       :require => false
+  gem 'beaker-rspec', :require => false
+  gem 'beaker-puppet_install_helper', :require => false
+end
+
+gem 'facter'
+
+if puppetversion = ENV['PUPPET_GEM_VERSION']
+  gem 'puppet', puppetversion, :require => false
+else
+  gem 'puppet', :require => false
+end

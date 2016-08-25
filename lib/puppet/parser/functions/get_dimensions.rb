@@ -1,7 +1,7 @@
 Puppet::Parser::Functions.newfunction(:get_dimensions, :type => :rvalue) do |args|
 dimension_list = args[0]
 aws_integration = args[1]
-DIMENSIONS = "?"
+dimensions = "?"
 if aws_integration
         puts "Getting AWS metadata..."
         uri = URI.parse("http://169.254.169.254/2014-11-05/dynamic/instance-identity/document")
@@ -24,11 +24,11 @@ if aws_integration
         end
         unless response.nil? || response == 0
                 result = JSON.parse(response.body)
-                DIMENSIONS << "sfxdim_AWSUniqueId=#{result["instanceId"]}_#{result["region"]}_#{result["accountId"]}&"
+                dimensions << "sfxdim_AWSUniqueId=#{result["instanceId"]}_#{result["region"]}_#{result["accountId"]}&"
         end
 end
 unless dimension_list.empty?
-        dimension_list.each {|key, value| DIMENSIONS << "sfxdim_#{key}=#{value}&"}
+        dimension_list.each {|key, value| dimensions << "sfxdim_#{key}=#{value}&"}
 end
-DIMENSIONS[0...-1]
+dimensions[0...-1]
 end
