@@ -8,13 +8,13 @@
 2. [Setup - The basics of getting started with collectd](#setup)
     * [What collectd affects](#what-collectd-affects)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
+4. [Supported Platforms](#supported-platforms)
 
 ## Overview
 
-This Puppet module installs and configures the collectd from [SignalFx](http://signalfx.com), it also configures the installed collectd to send metrics to SignalFx.
+This Puppet module installs the collectd from [SignalFx](https://github.com/signalfx/collectd). It also configures the installed collectd to send metrics to SignalFx.
 
-With this module, you can also configure collectd plugins like collectd-rabbitmq, collectd-elasticsearch, collectd-redis etc to send metrics to SignalFx.
+With this module you can also configure collectd plugins (e.g. collectd-rabbitmq, collectd-elasticsearch, collectd-redis, etc.) to send metrics to SignalFx.
 
 ## Setup
 ```puppet
@@ -23,7 +23,7 @@ puppet module install signalfx/collectd
 
 ### What collectd affects
 
-This module installs and configures collectd on your system to send various metrics to SignalFx. Be careful if you already have a working collectd. It will replace your existing collectd configuration.
+This module installs and configures collectd on your system to send various metrics to SignalFx. Be careful if you already have a working collectd as it will replace your existing collectd configuration.
 
 ## Usage
 
@@ -68,7 +68,7 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 
 ### Supported list of plugins
 
-We allow you to configure parameters to each plugin and they vary widely between plugins. Please check the notes under each plugin
+You may specify parameters on a per-plugin basis. Please check the notes under each plugin.
 
  1.  [Apache](#class-collectdpluginapache)
  2.  [Cassandra](#class-collectdplugincassandra)
@@ -173,7 +173,7 @@ class { 'collectd::plugins::elasticsearch':
 }
 ```
 See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
-The sample output file generated would look like [20-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple elasticsearch instances.
+The sample output file generated would look like [20-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments.
 
 ####Class: `collectd::plugin::kafka`
 
@@ -331,7 +331,7 @@ class { 'collectd::plugins::rabbitmq' :
 ```
 
 See [collectd-rabbitmq](https://github.com/signalfx/collectd-rabbitmq) for configurable parameters. 
-The sample output file generated would look like [10-rabbitmq.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-rabbitmq.conf). Currently, the plugin only monitors one rabbitmq instance, so you should include only one module in the above class arguments. The plugin code will be updated very soon to monitor multiple rabbitmq instances.
+The sample output file generated would look like [10-rabbitmq.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-rabbitmq.conf). Currently, the plugin only monitors one rabbitmq instance, so you should include only one module in the above class arguments.
 
 ####Class: `collectd::plugin::redis`
 
@@ -397,18 +397,20 @@ class { 'collectd::plugins::zookeeper' :
 ```
 See [collectd-zookeeper](https://github.com/signalfx/integrations/tree/master/collectd-zookeeper) for configurable parameters. 
 
-## Limitations
+## Supported Platforms
 
-Currently, the supported operating systems are 
+Currently, the supported platforms for this module are:
   1.  Ubuntu 12.04
   2.  Ubuntu 14.04
   3.  Ubuntu 15.04
   4.  Ubuntu 16.04
   5.  CentOS 6
   6.  CentOS 7
-  7.  Amazon Linux 2014.09
-  8.  Amazon Linux 2015.03
-  9.  Amazon Linux 2015.09
-  10. Amazon Linux 2016.03
-  11. Debian GNU/Linux 7 (wheezy)
-  12. Debian GNU/Linux 8 (jessie)
+  7.  RHEL 6
+  8.  RHEL 7
+  9.  Amazon Linux 2014.09
+  10. Amazon Linux 2015.03
+  11. Amazon Linux 2015.09
+  12. Amazon Linux 2016.03
+  13. Debian GNU/Linux 7 (wheezy)
+  14. Debian GNU/Linux 8 (jessie)
