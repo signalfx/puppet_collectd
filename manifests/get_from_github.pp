@@ -1,17 +1,29 @@
 # private
 define collectd::get_from_github(
-  $localfolder,
-  $source
+  $localfolder = undef,
+  $source      = undef,
+  $ensure       = present,
+  $revision    = 'master',
 ) {
-  if(!defined(Vcsrepo[$localfolder])){
-    collectd::check_and_install_package { $title:
-      package_name => 'git'
-    } ->
+  validate_string($source)
+
+  unless $localfolder {
+    $localfolder = $title
+  }
+
+  unless(defined(Package['git'])) {
+    package { 'git':
+      ensure => present,
+    }
+  }
+
+  unless(defined(Vcsrepo[$localfolder])) {
     vcsrepo { $localfolder:
-      ensure   => present,
+      ensure   => $ensure,
       provider => git,
       source   => $source,
-      require  => Package['git']
+      revision => $revision,
+      require  => Package['git'],
     }
   }
 }

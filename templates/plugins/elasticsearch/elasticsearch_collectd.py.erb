@@ -1058,9 +1058,7 @@ class CollectdLogHandler(logging.Handler):
     at level debug, info, notice, warning, and error
     to collectd's built in logging.  Suppresses extraneous
     info and debug statements using a "verbose" boolean
-
     Inherits from logging.Handler
-
     Arguments
         plugin -- name of the plugin (default 'unknown')
         verbose -- enable/disable verbose messages (default False)
@@ -1078,7 +1076,6 @@ class CollectdLogHandler(logging.Handler):
     def emit(self, record):
         """
         Emits a log record to the appropraite collectd log function
-
         Arguments
         record -- str log record to be emitted
         """
@@ -1105,16 +1102,13 @@ class CollectdLogger(logging.Logger):
     """Logs all collectd log levels via python's logging library
     Custom python logger that forwards log statements at
     level: debug, info, notice, warning, error
-
     Inherits from logging.Logger
-
     Arguments
     name -- name of the logger
     level -- log level to filter by
     """
     def __init__(self, name, level=logging.NOTSET):
         """Initializes CollectdLogger
-
         Arguments
         name -- name of the logger
         level -- log level to filter by
@@ -1124,7 +1118,6 @@ class CollectdLogger(logging.Logger):
 
     def notice(self, msg):
         """Logs a 'NOTICE' level statement at level 25
-
         Arguments
         msg - log statement to be logged as 'NOTICE'
         """

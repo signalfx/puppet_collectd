@@ -3,7 +3,7 @@ LoadPlugin nginx
 <Plugin "nginx">
 <%- @modules.each do |module_instance, module_config| -%>
   <%- module_config.each do |key,value| -%>
-      <%= key -%> <%= value %>
+    <%= key -%> <%= value %>
   <%- end -%>
 <%- end -%>
 </Plugin>

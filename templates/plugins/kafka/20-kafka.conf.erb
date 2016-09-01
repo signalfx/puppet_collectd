@@ -153,9 +153,9 @@
             </Value>
         </MBean>
 
-	<%- @connections.each do |connection_instance, connection_config| -%>
-	<Connection "<%= connection_instance %>">
-	<%- connection_config.each do |key,value| -%>
+	<%- @modules.each do |module_instance, module_config| -%>
+	<Connection "<%= module_instance %>">
+	<%- module_config.each do |key,value| -%>
 	  <%- if key == 'collect_metrics' -%>
 
 	  <%- value.each do |collectname| -%>

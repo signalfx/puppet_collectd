@@ -1,3 +1,8 @@
+Release 0.1.10
+  * Rename collectd::plugins::plugin_common to collectd::plugin
+  * Enable custom template location for plugins
+  * Standardized plugin configuration templates to use 'modules' as the config parameter
+
 Release 0.1.9
   * Fix for vmstat plugin to support RHEL
 
@@ -16,18 +21,18 @@ Release 0.1.6
   * Update signalfx metadata plugin to support optionally reporting cpu utilization on a per-core basis
 
 Release 0.1.5
-  * Add apache plugin
-  * Add cassandra plugin
-  * Add docker plugin
-  * Update elasticsearch plugin
-  * Add java (supporting) plugin
-  * Add kafka plugin
-  * Add mesos (master) plugin
-  * Add mongodb plugin
-  * Add nginx plugin
-  * Add postgresql plugin
-  * Update redis plugin
-  * Add zookeeper plugin
+  * Add Apache Httpd plugin
+  * Add Apache Cassandra plugin
+  * Add Docker plugin
+  * Update Elasticsearch plugin
+  * Add Java (supporting) plugin
+  * Add Apache Kafka plugin
+  * Add Apache Mesos (master) plugin
+  * Add Mongodb plugin
+  * Add Nginx plugin
+  * Add Postgresql plugin
+  * Update Redis plugin
+  * Add Apache Zookeeper plugin
 
 Release 0.1.4
   * Support Amazon Linux 2016.03
@@ -45,5 +50,5 @@ Release 0.1.1
 Release 0.1.0
 
   * Merge three modules into one module
-  * Add aggregation, elasticsearch, mysql, rabbitmq, redis plugin
+  * Add aggregation, Elasticsearch, Mysql, Rabbitmq, Redis plugin
   * Configurable parameters to each plugin

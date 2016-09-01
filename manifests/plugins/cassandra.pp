@@ -1,11 +1,15 @@
-class collectd::plugins::cassandra ( $connections ) {
-  validate_hash($connections)
+class collectd::plugins::cassandra (
+  $modules,
+) {
+  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
   include collectd::plugins::java
 
-  collectd::plugins::plugin_common { 'cassandra':
-    plugin_file_name     => '20-cassandra.conf',
-    plugin_template_name => 'cassandra/20-cassandra.conf.erb',
+  collectd::plugin { 'cassandra':
+    package_name     => 'collectd-cassandra',
+    config_file_name => '20-cassandra.conf',
+    config_template  => 'collectd/plugins/cassandra/20-cassandra.conf.erb',
+    modules          => $modules,
   }
 }

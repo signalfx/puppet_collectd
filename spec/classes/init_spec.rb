@@ -251,7 +251,7 @@ TypesDB \"/opt/signalfx-collectd-plugin/types.db.plugin\"
     }
 
     it {
-      is_expected.to contain_file('load 10-aggregation-cpu.conf plugin').with({
+      is_expected.to contain_file('load 10-aggregation-cpu.conf plugin config').with({
         'ensure' => 'present',
         'path'   => '/etc/collectd.d/managed_config/10-aggregation-cpu.conf',
         'owner'  => 'root',
@@ -299,7 +299,7 @@ LoadPlugin aggregation
     ].map{|k| k.split("\n")}.each do |text|
 
       it {
-        verify_contents(catalogue, 'load 10-aggregation-cpu.conf plugin', text)
+        verify_contents(catalogue, 'load 10-aggregation-cpu.conf plugin config', text)
       }
     end
 

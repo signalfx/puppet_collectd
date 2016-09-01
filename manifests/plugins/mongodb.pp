@@ -1,7 +1,8 @@
 class collectd::plugins::mongodb (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -37,9 +38,13 @@ class collectd::plugins::mongodb (
     content => template('collectd/plugins/mongodb/mongodb.py.erb'),
   }
 
-  collectd::plugins::plugin_common { 'mongodb':
-    package_name         => 'collectd-mongodb',
-    plugin_file_name     => '10-mongodb.conf',
-    plugin_template_name => 'mongodb/10-mongodb.conf.erb',
+  collectd::plugin { 'mongodb':
+    package_name        => 'collectd-mongodb',
+    manage_package      => false,
+    config_file_name    => '10-mongodb.conf',
+    config_template     => 'collectd/plugins/mongodb/10-mongodb.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }
