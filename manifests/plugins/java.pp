@@ -1,4 +1,7 @@
-class collectd::plugins::java ( ) {
+class collectd::plugins::java (
+  $modules,
+  $db_template = 'collectd/plugins/java/signalfx_types_db.erb',
+) {
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
@@ -17,12 +20,13 @@ class collectd::plugins::java ( ) {
     owner   => root,
     group   => 'root',
     mode    => '0755',
-    content => template('collectd/plugins/java/signalfx_types_db.erb'),
+    content => template($db_template),
   }
 
-  collectd::plugins::plugin_common { 'java':
-    package_name         => 'collectd-java',
-    plugin_file_name     => '10-jmx.conf',
-    plugin_template_name => 'java/10-jmx.conf.erb',
+  collectd::plugin { 'java':
+    package_name     => 'collectd-java',
+    config_file_name => '10-jmx.conf',
+    config_template  => 'collectd/plugins/java/10-jmx.conf.erb',
+    modules          => $modules,
   }
 }

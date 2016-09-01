@@ -19,9 +19,9 @@
 
 LoadPlugin mysql
 <Plugin mysql>
-  <% @databases.each do |instance, config| -%>
-  <Database <%= instance -%> >
-    <% config.each do |key,value| -%>
+  <% @modules.each do |module_instance, module_config| -%>
+  <Database <%= module_instance -%> >
+    <% module_config.each do |key,value| -%>
     <%= key -%> <%= value %>
     <% end -%>
   </Database>

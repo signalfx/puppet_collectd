@@ -1,7 +1,8 @@
 class collectd::plugins::vmstat (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -36,9 +37,12 @@ class collectd::plugins::vmstat (
     require => Package['sysstat']
   }
 
-  collectd::plugins::plugin_common { 'vmstat':
-    package_name         => 'collectd-python',
-    plugin_file_name     => '10-vmstat.conf',
-    plugin_template_name => 'vmstat/10-vmstat.conf.erb',
+  collectd::plugin { 'vmstat':
+    package_name        => 'collectd-python',
+    config_file_name    => '10-vmstat.conf',
+    config_template     => 'collectd/plugins/vmstat/10-vmstat.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }

@@ -1,9 +1,9 @@
-# private
 class collectd::plugins::aggregation {
   include collectd
 
-  collectd::plugins::plugin_common { 'aggregation':
-    plugin_file_name     => '10-aggregation-cpu.conf',
-    plugin_template_name => '../aggregation-cpu.conf.erb'
+  collectd::plugin { 'aggregation':
+    manage_package   => false,
+    config_file_name => '10-aggregation-cpu.conf',
+    config_template  => 'collectd/aggregation-cpu.conf.erb'
   }
 }

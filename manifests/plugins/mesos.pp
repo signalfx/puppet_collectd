@@ -1,7 +1,8 @@
 class collectd::plugins::mesos (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -35,8 +36,13 @@ class collectd::plugins::mesos (
     content => template('collectd/plugins/mesos/mesos_collectd.py.erb'),
   }
 
-  collectd::plugins::plugin_common { 'mesos':
-    plugin_file_name     => '10-mesos-master.conf',
-    plugin_template_name => 'mesos/10-mesos-master.conf.erb',
+  collectd::plugin { 'mesos':
+    plugin_name         => 'collectd-mesos',
+    manage_package      => false,
+    config_file_name    => '10-mesos-master.conf',
+    config_template     => 'collectd/plugins/mesos/10-mesos-master.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }

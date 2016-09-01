@@ -203,12 +203,10 @@ def read_memory_stats(container, dimensions, stats, t):
 
 class DimensionsProvider:
     """Helper class for performing dimension extraction from a given container.
-
     Dimensions to extract are specified via a "spec" following the syntax
     "<provider>:<source>". The provider defines the means by which the
     dimension value is extracted, and the source gives some information as to
     where to find the dimension value through this provider.
-
     Extracting dimensions values from the container's environment or from its
     JSON Docker details are supported, as well as specifying direct, raw
     values.
@@ -269,7 +267,6 @@ class ContainerStats(threading.Thread):
     """
     A thread that continuously consumes the stats stream from a container,
     keeping the most recently read stats available for processing by CollectD.
-
     Such a mechanism is required because the first read from Docker's stats API
     endpoint can take up to one second. Hitting this endpoint for every
     container running on the system would only be feasible if the number of
@@ -278,7 +275,6 @@ class ContainerStats(threading.Thread):
     the stats stream and read from it, but because it is a continuous stream we
     need to be continuously consuming from it to make sure that when CollectD
     requests a plugin read, it gets the latest stats data from each container.
-
     The role of this thread is to keep consuming from the stats endpoint (it's
     a blocking stream read, getting stats data from the Docker daemon every
     second), and make the most recently read data available in a variable.
@@ -494,9 +490,7 @@ class CollectdLogHandler(logging.Handler):
     at level debug, info, notice, warning, and error
     to collectd's built in logging.  Suppresses extraneous
     info and debug statements using a "verbose" boolean
-
     Inherits from logging.Handler
-
     Arguments
         plugin -- name of the plugin (default 'unknown')
         verbose -- enable/disable verbose messages (default False)
@@ -514,7 +508,6 @@ class CollectdLogHandler(logging.Handler):
     def emit(self, record):
         """
         Emits a log record to the appropraite collectd log function
-
         Arguments
         record -- str log record to be emitted
         """
@@ -541,16 +534,13 @@ class CollectdLogger(logging.Logger):
     """Logs all collectd log levels via python's logging library
     Custom python logger that forwards log statements at
     level: debug, info, notice, warning, error
-
     Inherits from logging.Logger
-
     Arguments
     name -- name of the logger
     level -- log level to filter by
     """
     def __init__(self, name, level=logging.NOTSET):
         """Initializes CollectdLogger
-
         Arguments
         name -- name of the logger
         level -- log level to filter by
@@ -560,7 +550,6 @@ class CollectdLogger(logging.Logger):
 
     def notice(self, msg):
         """Logs a 'NOTICE' level statement at level 25
-
         Arguments
         msg - log statement to be logged as 'NOTICE'
         """

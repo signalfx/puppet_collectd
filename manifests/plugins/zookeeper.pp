@@ -1,7 +1,8 @@
 class collectd::plugins::zookeeper (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -24,9 +25,12 @@ class collectd::plugins::zookeeper (
     content => template('collectd/plugins/zookeeper/zk-collectd.py.erb'),
   }
 
-  collectd::plugins::plugin_common { 'zookeeper':
-    package_name         => 'collectd-zookeeper',
-    plugin_file_name     => '20-zookeeper.conf',
-    plugin_template_name => 'zookeeper/20-zookeeper.conf.erb',
+  collectd::plugin { 'zookeeper':
+    package_name        => 'collectd-python',
+    config_file_name    => '20-zookeeper.conf',
+    config_template     => 'collectd/plugins/zookeeper/20-zookeeper.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }

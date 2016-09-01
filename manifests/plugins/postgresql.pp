@@ -1,14 +1,18 @@
 class collectd::plugins::postgresql (
-  $databases,
+  $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
-  validate_hash($databases)
+  $filter_metric_rules = {},
+) {
+  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  collectd::plugins::plugin_common { 'postgresql':
-    package_name         => 'collectd-postgresql',
-    plugin_file_name     => '10-postgresql.conf',
-    plugin_template_name => 'postgresql/10-postgresql.conf.erb',
+  collectd::plugin { 'postgresql':
+    package_name        => 'collectd-postgresql',
+    config_file_name    => '10-postgresql.conf',
+    config_template     => 'collectd/plugins/postgresql/10-postgresql.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }

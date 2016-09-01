@@ -1,15 +1,18 @@
 class collectd::plugins::memcached (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  collectd::plugins::plugin_common { 'memcached':
-    package_name         => 'collectd-memcached',
-    plugin_file_name     => '10-memcached.conf',
-    plugin_template_name => 'memcached/10-memcached.conf.erb',
+  collectd::plugin { 'memcached':
+    package_name        => 'collectd-memcached',
+    config_file_name    => '10-memcached.conf',
+    config_template     => 'collectd/plugins/memcached/10-memcached.conf.erb',
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
   }
 }
-
