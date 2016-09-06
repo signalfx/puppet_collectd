@@ -208,6 +208,21 @@ class { 'collectd::plugins::kafka' :
 
 See [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) for configurable parameters. 
 
+####Class: `collectd::plugin::memcached`
+
+```memcached
+class { 'collectd::plugins::memcached':
+  modules => {
+    'config' => {
+      'Host'  => '"127.0.0.1"',
+      'Port'  => '"11211"'
+    }
+  }
+}
+```
+
+See [collectd-memcached](https://github.com/signalfx/integrations/tree/master/collectd-memcached) for configurable parameters and memcached configuration instructions. 
+
 ####Class: `collectd::plugin::mesos`
 
 ```puppet
@@ -382,6 +397,37 @@ class { 'collectd::plugins::redis' :
 
 See [redis-collectd-plugin](https://github.com/signalfx/redis-collectd-plugin) for configurable parameters. 
 The sample output file generated would look like [10-redis_master.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-redis_master.conf)
+
+####Class: `collectd::plugin::varnish`
+
+```puppet
+class { 'collectd::plugins::varnish' :
+  modules => {
+    'instance' => {
+      'CollectCache' => true,
+      'CollectConnections' => true,
+      'CollectBackend' => true,
+      'CollectSHM' => true,
+      'CollectESI' => true,
+      'CollectFetch' => true,
+      'CollectHCB' => true,
+      'CollectSMA' => true,
+      'CollectSMS' => true,
+      'CollectSM' => true,
+      'CollectTotals' => true,
+      'CollectWorkers' => true,
+      'CollectUptime' => true,
+      'CollectVCL' => true,
+      'CollectStruct' => true,
+      'CollectObjects' => true,
+      'CollectSession' => true,
+      'CollectVSM' =>true
+    }
+  }
+}
+```
+
+See [collectd-varnish](https://github.com/signalfx/integrations/tree/master/collectd-varnish) for configurable parameters. 
 
 ####Class: `collectd::plugin::zookeeper`
 
