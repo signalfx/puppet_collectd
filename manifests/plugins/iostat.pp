@@ -30,18 +30,7 @@ class collectd::plugins::iostat ( $modules ) {
     group   => 'root',
     mode    => '0755',
     content => template('collectd/plugins/iostat/collectd_iostat_python.py.erb'),
-    before  => File['get iostat_types.db'],
     require => Package['sysstat']
-  }
-
-  file { 'get iostat_types.db':
-    ensure  => present,
-    replace => 'yes',
-    path    => '/usr/share/collectd/iostat-collectd-plugin/iostat_types.db',
-    owner   => root,
-    group   => 'root',
-    mode    => '0755',
-    content => template('collectd/plugins/iostat/iostat_types.db.erb'),
   }
 
   collectd::plugins::plugin_common { 'iostat':

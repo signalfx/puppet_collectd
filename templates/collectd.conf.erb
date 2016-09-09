@@ -52,6 +52,15 @@ LoadPlugin logfile
   PrintSeverity false
 </Plugin>
 
+<%- @loadplugins.each do |plugin, loadplugin_config| -%>
+<LoadPlugin <%= plugin %>>
+  <%- loadplugin_config.each do |key,value| -%>
+  <%= key -%> <%= value %>
+  <%- end -%>
+</LoadPlugin>
+
+<%- end -%>
+
 LoadPlugin cpu
 LoadPlugin cpufreq
 LoadPlugin df
@@ -94,6 +103,8 @@ LoadPlugin vmem
 </Plugin>
 
 LoadPlugin uptime
+
+
 
 # Note: You will get warnings on startup if you have no *.conf files.
 #       This is ok: CollectD will still start.
