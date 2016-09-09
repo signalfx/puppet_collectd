@@ -70,7 +70,7 @@ class IOStat(object):
         Main statistics:
           tps  Blk_read/s  Blk_wrtn/s  Blk_read  Blk_wrtn
         Extended staistics (available with post 2.5 kernels):
-          rrqm/s  wrqm/s  r/s  w/s  rsec/s  wsec/s  rkB/s  wkB/s  avgrq-sz \
+          rrqm/s  wrqm/s  r/s  w/s  rsec/s  wsec/s  rkB/s  wkB/s  avgrq-sz
           avgqu-sz  await  svctm  %util
         See I{man iostat} for more details.
         """
@@ -162,7 +162,7 @@ class IOMon(object):
     def __init__(self):
         self.plugin_name = 'iostat'
         self.iostat_path = '/usr/bin/iostat'
-        self.interval = 60.0
+        self.interval = 10.0
         self.iostat_interval = 2
         self.iostat_count = 2
         self.iostat_disks = []
@@ -236,9 +236,7 @@ class IOMon(object):
             elif node.key == 'Verbose':
                 self.verbose_logging = val in ['True', 'true']
             elif node.key == 'Include':
-                tbl = string.maketrans('/-%', '___')
-                for i in node.values:
-                    self.include.add(i.translate(tbl))
+                self.include.update(node.values)
             else:
                 collectd.warning(
                     '%s plugin: Unknown config key: %s.' % (
@@ -312,8 +310,7 @@ class IOMon(object):
                         value *= self.names[name]['m']
                 else:
                     val_type = 'gauge'
-                    tbl = string.maketrans('/-%', '___')
-                    type_instance = name.translate(tbl)
+                    type_instance = name
                     value = ds[disk][name]
 
                 if len(self.include) == 0 \
@@ -341,9 +338,7 @@ if __name__ == '__main__':
 
     for disk in ds:
         for metric in ds[disk]:
-            tbl = string.maketrans('/-%', '___')
-            metric_name = metric.translate(tbl)
-            print("%s.%s:%s" % (disk, metric_name, ds[disk][metric]))
+            print("%s.%s:%s" % (disk, metric, ds[disk][metric]))
 
     sys.exit(0)
 else:

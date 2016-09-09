@@ -1,3 +1,10 @@
+Release 0.1.6
+  * Add ability to configure plugin-specific reporting intervals
+  * Add iostat plugin
+  * Add memcached plugin
+  * Add varnish plugin
+  * Update signalfx metadata plugin to support optionally reporting cpu utilization on a per-core basis
+
 Release 0.1.5
   * Add apache plugin
   * Add cassandra plugin

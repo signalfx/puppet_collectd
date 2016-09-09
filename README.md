@@ -68,6 +68,25 @@ signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
 signalfx_plugin_cpu_utilization | CPU Utilization option of signalfx-collectd-plugin
 signalfx_plugin_cpu_utilization_per_core | CPU Utilization for individual cores option of signalfx-collectd-plugin
 
+### Plugin Interval
+
+You can set the plugin-specific interval for collecting metrics.  This overrides the global interval setting.
+The following example sets the interval for the cpu and disk plugins to 1 second.
+
+```puppet
+class { 'collectd' :
+    signalfx_api_token  => 'YOUR_SIGNALFX_API_TOKEN',
+    loadplugins => {
+        'cpu' => {
+          'Interval' => 1
+        },
+        'disk' => {
+          'Interval' => 1
+        }
+    }
+}
+```
+
 ### Supported list of plugins
 
 You may specify parameters on a per-plugin basis. Please check the notes under each plugin.
@@ -217,11 +236,8 @@ class { 'collectd::plugins::iostat':
   modules => {
     'collectd_iostat_python' => {
         'Path' => '"/usr/bin/iostat"',
-        'Interval' => 60,
-        'Count' => 2,
         'Verbose' => false,
-        'NiceNames' => true,
-        'Include' => '["avg_request_queue", "avg_request_size", "avg_service_time", "avg_wait_time", "avg_wait_time.read", "avg_wait_time.write", "bytes.read", "bytes.write", "bytes_per_second.read", "bytes_per_second.write", "percent.util", "requests_merged_per_second.read", "requests_merged_per_second.write", "requests_per_second.read", "requests_per_second.write", "transfers_per_second", "tps", "kB_read_s", "kB_wrtn_s", "kB_read", "kB_wrtn", "rrqm_s", "wrqm_s", "r_s", "w_s", "rsec_s", "rkB_s", "wsec_s", "wkB_s", "avgrq_sz", "avgqu_sz", "await", "r_await", "w_await", "svctm", "_util"]'
+        'Include' => '["tps", "kB_read/s", "kB_wrtn/s", "kB_read", "kB_wrtn", "rrqm/s", "wrqm/s", "r/s", "w/s", "rsec/s", "rkB/s", "wsec/s", "wkB/s", "avgrq-sz", "avgqu-sz", "await", "r_await", "w_await", "svctm", "%util"]'
     }
   }
 }

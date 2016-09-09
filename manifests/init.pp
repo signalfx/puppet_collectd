@@ -17,6 +17,7 @@ class collectd (
     $collect_internal_stats                   = $collectd::params::collect_internal_stats,
     $log_file                                 = $collectd::params::log_file,
     $log_level                                = $collectd::params::log_level,
+    $loadplugins                              = $collectd::params::loadplugins,
     # write_http parameters
     $dimension_list                           = $collectd::params::dimension_list,
     $aws_integration                          = $collectd::params::aws_integration,
