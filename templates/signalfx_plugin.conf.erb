@@ -12,5 +12,7 @@ TypesDB "/opt/signalfx-collectd-plugin/types.db.plugin"
     NotifyLevel "<%= @signalfx_plugin_notify_level %>"
     DPM <%= @signalfx_plugin_dpm %>
     Utilization <%= @signalfx_plugin_utilization %>
+    OverallCPUUtil <%= @signalfx_plugin_cpu_utilization %>
+    PerCoreCPUUtil <%= @signalfx_plugin_cpu_utilization_per_core %>
   </Module>
 </Plugin>

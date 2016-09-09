@@ -1,16 +1,18 @@
 # signalfx plugin
 class collectd::plugins::signalfx(
-  $ensure_signalfx_plugin_version    = $collectd::ensure_signalfx_plugin_version,
-  $signalfx_plugin_repo_source       = $collectd::signalfx_plugin_repo_source,
-  $dimension_list                    = $collectd::dimension_list,
-  $aws_integration                   = $collectd::aws_integration,
-  $signalfx_api_endpoint             = $collectd::signalfx_api_endpoint,
-  $signalfx_plugin_log_traces        = $collectd::signalfx_plugin_log_traces,
-  $signalfx_plugin_interactive       = $collectd::signalfx_plugin_interactive,
-  $signalfx_plugin_notifications     = $collectd::signalfx_plugin_notifications,
-  $signalfx_plugin_notify_level      = $collectd::signalfx_plugin_notify_level,
-  $signalfx_plugin_dpm               = $collectd::signalfx_plugin_dpm,
-  $signalfx_plugin_utilization       = $collectd::signalfx_plugin_utilization
+  $ensure_signalfx_plugin_version           = $collectd::ensure_signalfx_plugin_version,
+  $signalfx_plugin_repo_source              = $collectd::signalfx_plugin_repo_source,
+  $dimension_list                           = $collectd::dimension_list,
+  $aws_integration                          = $collectd::aws_integration,
+  $signalfx_api_endpoint                    = $collectd::signalfx_api_endpoint,
+  $signalfx_plugin_log_traces               = $collectd::signalfx_plugin_log_traces,
+  $signalfx_plugin_interactive              = $collectd::signalfx_plugin_interactive,
+  $signalfx_plugin_notifications            = $collectd::signalfx_plugin_notifications,
+  $signalfx_plugin_notify_level             = $collectd::signalfx_plugin_notify_level,
+  $signalfx_plugin_dpm                      = $collectd::signalfx_plugin_dpm,
+  $signalfx_plugin_utilization              = $collectd::signalfx_plugin_utilization,
+  $signalfx_plugin_cpu_utilization          = $collectd::signalfx_plugin_cpu_utilization,
+  $signalfx_plugin_cpu_utilization_per_core = $collectd::signalfx_plugin_cpu_utilization_per_core
 ) inherits collectd {
 
   $dimensions = get_dimensions($dimension_list, $aws_integration)

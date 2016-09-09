@@ -65,6 +65,8 @@ signalfx_plugin_notifications | Notifications option of signalfx-collectd-plugin
 signalfx_plugin_notify_level | NotifyLevel option of signalfx-collectd-plugin
 signalfx_plugin_dpm | DPM option of signalfx-collectd-plugin
 signalfx_plugin_utilization | Utilization option of signalfx-collectd-plugin
+signalfx_plugin_cpu_utilization | CPU Utilization option of signalfx-collectd-plugin
+signalfx_plugin_cpu_utilization_per_core | CPU Utilization for individual cores option of signalfx-collectd-plugin
 
 ### Supported list of plugins
 
