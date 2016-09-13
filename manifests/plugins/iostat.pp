@@ -1,4 +1,7 @@
-class collectd::plugins::iostat ( $modules ) {
+class collectd::plugins::iostat (
+  $modules,
+  $filter_metrics = false,
+  $filter_metric_rules = {} ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -14,7 +17,7 @@ class collectd::plugins::iostat ( $modules ) {
     ensure => present,
   }
 
-  file { ['/usr/share/', '/usr/share/collectd/', '/usr/share/collectd/iostat-collectd-plugin/']:
+  file { ['/usr/share/collectd/iostat-collectd-plugin/']:
     ensure => directory,
     owner  => root,
     group  => 'root',

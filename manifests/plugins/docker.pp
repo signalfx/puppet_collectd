@@ -1,4 +1,7 @@
-class collectd::plugins::docker ( $modules ) {
+class collectd::plugins::docker (
+  $modules,
+  $filter_metrics = false,
+  $filter_metric_rules = {} ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -14,18 +17,18 @@ class collectd::plugins::docker ( $modules ) {
     ensure => present,
   }
 
-  exec { 'install dependencies':
+  exec { 'install docker dependencies':
     command => 'pip install py-dateutil && pip install docker-py>=1.0.0 && pip install jsonpath_rw',
     require => Package['python-pip']
   }
 
-  file { ['/usr/share/', '/usr/share/collectd/', '/usr/share/collectd/docker-collectd-plugin/']:
+  file { ['/usr/share/collectd/docker-collectd-plugin/']:
     ensure  => directory,
     owner   => root,
     group   => 'root',
     mode    => '0755',
     before  => File['get dockerplugin.py'],
-    require => Exec['install dependencies']
+    require => Exec['install docker dependencies']
   }
 
   file { 'get dockerplugin.py':

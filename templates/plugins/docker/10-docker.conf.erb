@@ -15,46 +15,81 @@ LoadPlugin python
     <%- end -%>
 </Plugin>
 
+<%- if @filter_metrics == true -%>
 LoadPlugin match_regex
 <Chain "PostCache">
-    <Rule >
-        <Match "regex">
-            Plugin "^docker$"
-        </Match>
-        <Target "jump">
-            Chain "FilterOutDetailedDockerStats"
-        </Target>
-    </Rule>
+  <Rule>
+    <Match "regex">
+      Plugin "^docker$"
+    </Match>
+    <Target "jump">
+      Chain "FilterDockerStats"
+    </Target>
+  </Rule>
+  Target "write"
+</Chain>
 
-    Target "write"
+<Chain "FilterDockerStats">
+<%- @filter_metric_rules.each do |rule_instance, rule| -%>
+    <Rule "<%= rule_instance -%>">
+      <Match "regex">
+      <%- rule.each do |key,value| -%>
+        <%- if key != "Type" -%>
+        <%= key -%> "<%= value %>"
+	<%- else -%>
+        <%= key -%> "^<%= value %>$"
+	<%- end -%>
+      <%- end -%>
+      </Match>
+      Target "return"
+    </Rule>
+<%- end -%>
+  Target "stop"
+</Chain>
+
+<%- else -%>
+
+LoadPlugin match_regex
+<Chain "PostCache">
+  <Rule>
+    <Match "regex">
+      Plugin "^docker$"
+    </Match>
+    <Target "jump">
+      Chain "FilterOutDetailedDockerStats"
+    </Target>
+  </Rule>
+
+  Target "write"
 </Chain>
 <Chain "FilterOutDetailedDockerStats">
-    <Rule "CpuUsage">
-        <Match "regex">
-            Type "^cpu.usage$"
-        </Match>
-        Target "return"
-    </Rule>
-    <Rule "MemoryUsage">
-        <Match "regex">
-            Type "^memory.usage$"
-        </Match>
-        Target "return"
-    </Rule>
-    <Rule "NetworkUsage">
-        <Match "regex">
-            Type "^network.usage$"
-        </Match>
-        Target "return"
-    </Rule>
-    <Rule "BlockIO">
-        <Match "regex">
-            Type "^blkio$"
-            TypeInstance "^io_service_bytes_recursive-.*"
-        </Match>
-        Target "return"
-    </Rule>
+  <Rule "CpuUsage">
+    <Match "regex">
+      Type "^cpu.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "MemoryUsage">
+    <Match "regex">
+      Type "^memory.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "NetworkUsage">
+    <Match "regex">
+      Type "^network.usage$"
+    </Match>
+    Target "return"
+  </Rule>
+  <Rule "BlockIO">
+    <Match "regex">
+      Type "^blkio$"
+      TypeInstance "^io_service_bytes_recursive-.*"
+    </Match>
+    Target "return"
+  </Rule>
 
-    Target "stop"
+  Target "stop"
 </Chain>
 
+<%- end -%>

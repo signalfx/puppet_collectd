@@ -12,6 +12,22 @@ LoadPlugin match_regex
     </Target>
     Target stop
   </Rule>
+
+<%- if @filter_default_metrics == true -%>
+
+  <%- @filter_default_metric_rules.each do |plugin, rules| -%>
+  <Rule>
+    <Match "regex">
+      Plugin "^<%= plugin %>$"
+    </Match>
+    <Target "jump">
+      Chain "Filter<%= plugin %>Stats"
+    </Target>
+  </Rule>
+  <%- end -%>
+
+<%- else -%>
+
   <Rule "FilterOutExcessiveVmemData">
     <Match "regex">
       Plugin '^vmem$'
@@ -21,9 +37,35 @@ LoadPlugin match_regex
     </Target>
   </Rule>
 
+<%- end -%>
+
   Target write
 </Chain>
 
+
+<%- if @filter_default_metrics == true -%>
+
+<%- @filter_default_metric_rules.each do |plugin, rules| -%>
+<Chain "Filter<%= plugin %>Stats">
+<%- rules.each do |rule_instance, rule| -%>
+    <Rule "<%= rule_instance -%>">
+      <Match "regex">
+      <%- rule.each do |key,value| -%>
+        <%- if key != "Type" -%>
+        <%= key -%> "<%= value %>"
+	<%- else -%>
+        <%= key -%> "^<%= value %>$"
+	<%- end -%>
+      <%- end -%>
+      </Match>
+      Target "return"
+    </Rule>
+<%- end -%>
+  Target "stop"
+</Chain>
+<%- end -%>
+
+<%- else -%>
 
 <Chain "VmemFilters">
   <Rule "vmem_filtering_accept_whitelisted_vmpage_faults">
@@ -58,3 +100,5 @@ LoadPlugin match_regex
 
   Target "stop"
 </Chain>
+
+<%- end -%>

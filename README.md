@@ -87,6 +87,92 @@ class { 'collectd' :
 }
 ```
 
+### Metric Filtering
+
+#### Plugin Metric Filtering
+
+You can control which plugin-specific metrics are sent to SignalFx using collectd filtering.
+
+The basic usage is to set *filter_metrics* to true and then add rules to *filter_metric_rules* based on *Type* and/or *TypeInstance*.
+A rule's name can be anything, Type must be the complete name of type, and TypeInstance can be a regular expression.
+
+```puppet
+filter_metrics => true,
+filter_metric_rules => {
+  'some_rule_name' => {
+    'Type' => 'some_type',
+    'TypeInstance' => '^some_type_instance*'
+  }
+}
+```
+
+The following example filters the metrics sent from the mysql plugin for all types of "mysql_octets" and also the "threads.running" metric.
+
+```puppet
+class { 'collectd::plugins::mysql' :
+  databases => {
+    'mydb_plugin_instance' => {
+      'Host' => '"localhost"',
+      'User' => '"admin"',
+      'Password' => '"root"',
+      'Database' => '"mydb"',
+      'Socket' => '"/var/run/mysqld/mysqld.sock"'
+    }
+  },
+  filter_metrics => true,
+  filter_metric_rules => {
+  'Mysql-Octets-Whitelist' => {
+     'Type' => 'mysql_octets'
+   },
+   'Mysql-RunningThreads-Whitelist' => {
+      'Type' => 'threads',
+      'TypeInstance' => 'running'
+    }
+  }
+}
+```
+
+__Note:__ This feature is not available for java plugins which use their own mbean filtering technique.
+
+#### Default Plugin Metric Filtering
+
+You can also control which default plugin metrics are sent to SignalFx using collectd filtering.
+See the collectd.conf template for the list of default plugins.
+
+The basic usage is to set *filter_default_metrics* to true and then add rules to *filter_default_metric_rules* for one or more plugins based on *Type* and/or *TypeInstance*.
+The plugin and rule names are required. The Type must be the complete name of type, and TypeInstance can be a regular expression.
+
+```puppet
+filter_default_metrics => true,
+filter_default_metric_rules => {
+  'plugin_name' => {
+    'rule_name' => {
+      'Type' => 'some_type',
+      'TypeInstance' => '^some_type_instance*'
+    }
+  }
+}
+```
+
+The following example applies a filter to the default vmem plugin so that only *vmpage_io.swap.in* and *vmpage_io.swap.out* metrics are sent.
+
+```puppet
+class { 'collectd' :
+  signalfx_api_token  => 'YOUR_SIGNALFX_API_TOKEN',
+  filter_default_metrics => true,
+  filter_default_metric_rules => {
+    'vmem' => {
+      'whitelist_vmpage_io' => {
+        'Type' => 'vmpage_io',
+        'TypeInstance' => '^swap*'
+      }
+    }
+  }
+}
+```
+
+__Note:__ This feature will override any default filters in the filtering.conf file.
+
 ### Supported list of plugins
 
 You may specify parameters on a per-plugin basis. Please check the notes under each plugin.
@@ -96,19 +182,22 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
  3.  [Docker](#class-collectdplugindocker)
  4.  [Elasticsearch](#class-collectdpluginelasticsearch)
  5.  [Kafka](#class-collectdpluginkafka)
- 6.  [Mesos](#class-collectdpluginmesos)
- 7.  [MongoDB](#class-collectdpluginmongodb)
- 8.  [MySQL](#class-collectdpluginmysql)
- 9.  [Nginx](#class-collectdpluginnginx)
- 10. [Postgresql](#class-collectdpluginpostgresql)
- 11. [RabbitMQ](#class-collectdpluginrabbitmq)
- 12. [Redis](#class-collectdpluginredis)
- 13. [Zookeeper](#class-collectdpluginzookeeper)
+ 6.  [Iostat](#class-collectdpluginiostat)
+ 7.  [Memcached](#class-collectdpluginmemcached)
+ 8.  [Mesos](#class-collectdpluginmesos)
+ 9.  [MongoDB](#class-collectdpluginmongodb)
+ 10. [MySQL](#class-collectdpluginmysql)
+ 11. [Nginx](#class-collectdpluginnginx)
+ 12. [Postgresql](#class-collectdpluginpostgresql)
+ 13. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 14. [Redis](#class-collectdpluginredis)
+ 15. [Varnish](#class-collectdpluginvarnish)
+ 16. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
 
-```apache
+```puppet
 class { 'collectd::plugins::apache':
   instances => {
     'myinstance' => {
@@ -159,13 +248,29 @@ See [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/co
 
 ####Class: `collectd::plugin::docker`
 
-```docker
+```puppet
 class { 'collectd::plugins::docker':
   modules => {
     'dockerplugin' => {
         'BaseURL'              => '"unix://var/run/docker.sock"',
         'Timeout'              => '3',
         'Verbose'              => false
+    }
+  },
+  filter_metrics => true,
+  filter_metric_rules => {
+    'CpuUsage' => {
+       'Type' => 'cpu.usage'
+     },
+    'MemoryUsage' => {
+       'Type' => 'memory.usage'
+    },
+    'NetworkUsage' => {
+       'Type' => 'network.usage'
+    },
+    'BlockIO' => {
+       'Type' => 'blkio',
+       'TypeInstance' => '^io_service_bytes_recursive-.*'
     }
   }
 }
@@ -246,7 +351,7 @@ See [collectd-iostat](https://github.com/signalfx/integrations/tree/master/colle
 
 ####Class: `collectd::plugin::memcached`
 
-```memcached
+```puppet
 class { 'collectd::plugins::memcached':
   modules => {
     'config' => {
@@ -305,11 +410,11 @@ See [collectd-mongodb](https://github.com/signalfx/integrations/tree/master/coll
 class { 'collectd::plugins::mysql' :
   databases => {
     'mydb_plugin_instance' => {
-      'Host' => 'localhost',
-      'User' => 'admin',
-      'Password' => 'root',
-      'Database' => 'mydb',
-      'Socket' => '/var/run/mysqld/mysqld.sock'
+      'Host' => '"localhost"',
+      'User' => '"admin"',
+      'Password' => '"root"',
+      'Database' => '"mydb"',
+      'Socket' => '"/var/run/mysqld/mysqld.sock"'
     }
   }
 }
@@ -320,10 +425,12 @@ The sample output file generated would look like [10-mysql.conf](https://github.
 
 ####Class: `collectd::plugin::nginx`
 
-```nginx
+```puppet
 class { 'collectd::plugins::nginx':
-  'config' => {
-    'URL'  => '"http://localhost:80/nginx_status"',
+  modules => {
+    'config' => {
+      'URL'  => '"http://localhost:80/nginx_status"',
+    }
   }
 }
 ```

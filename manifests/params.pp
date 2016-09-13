@@ -29,6 +29,8 @@ class collectd::params {
         $signalfx_plugin_utilization              = true
         $signalfx_plugin_cpu_utilization          = true
         $signalfx_plugin_cpu_utilization_per_core = true
+        $filter_default_metrics                   = false
+        $filter_default_metric_rules              = {}
 
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {

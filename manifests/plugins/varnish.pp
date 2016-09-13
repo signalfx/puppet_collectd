@@ -1,4 +1,7 @@
-class collectd::plugins::varnish ( $modules ) {
+class collectd::plugins::varnish (
+  $modules,
+  $filter_metrics = false,
+  $filter_metric_rules = {} ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd

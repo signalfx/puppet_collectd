@@ -13,3 +13,35 @@ LoadPlugin python
     <%- end -%>
 </Plugin>
 
+<%- if @filter_metrics == true -%>
+LoadPlugin match_regex
+<Chain "PostCache">
+  <Rule>
+    <Match "regex">
+      Plugin "^mongo$"
+    </Match>
+    <Target "jump">
+      Chain "FilterMongoStats"
+    </Target>
+  </Rule>
+  Target "write"
+</Chain>
+
+<Chain "FilterMongoStats">
+<%- @filter_metric_rules.each do |rule_instance, rule| -%>
+    <Rule "<%= rule_instance -%>">
+      <Match "regex">
+      <%- rule.each do |key,value| -%>
+        <%- if key != "Type" -%>
+        <%= key -%> "<%= value %>"
+	<%- else -%>
+        <%= key -%> "^<%= value %>$"
+	<%- end -%>
+      <%- end -%>
+      </Match>
+      Target "return"
+    </Rule>
+<%- end -%>
+  Target "stop"
+</Chain>
+<%- end -%>

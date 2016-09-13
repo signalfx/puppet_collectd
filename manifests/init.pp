@@ -37,7 +37,9 @@ class collectd (
     $signalfx_plugin_dpm                      = $collectd::params::signalfx_plugin_dpm,
     $signalfx_plugin_utilization              = $collectd::params::signalfx_plugin_utilization,
     $signalfx_plugin_cpu_utilization          = $collectd::params::signalfx_plugin_cpu_utilization,
-    $signalfx_plugin_cpu_utilization_per_core = $collectd::params::signalfx_plugin_cpu_utilization_per_core
+    $signalfx_plugin_cpu_utilization_per_core = $collectd::params::signalfx_plugin_cpu_utilization_per_core,
+    $filter_default_metrics                   = $collectd::params::filter_default_metrics,
+    $filter_default_metric_rules              = $collectd::params::filter_default_metric_rules
 )  inherits collectd::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
