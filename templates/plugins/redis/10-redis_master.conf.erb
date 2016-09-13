@@ -16,3 +16,35 @@
     <%- end -%>
 </Plugin>
 
+<%- if @filter_metrics == true -%>
+LoadPlugin match_regex
+<Chain "PostCache">
+  <Rule>
+    <Match "regex">
+      Plugin "^redis_info$"
+    </Match>
+    <Target "jump">
+      Chain "FilterRedisInfoStats"
+    </Target>
+  </Rule>
+  Target "write"
+</Chain>
+
+<Chain "FilterRedisInfoStats">
+<%- @filter_metric_rules.each do |rule_instance, rule| -%>
+    <Rule "<%= rule_instance -%>">
+      <Match "regex">
+      <%- rule.each do |key,value| -%>
+        <%- if key != "Type" -%>
+        <%= key -%> "<%= value %>"
+	<%- else -%>
+        <%= key -%> "^<%= value %>$"
+	<%- end -%>
+      <%- end -%>
+      </Match>
+      Target "return"
+    </Rule>
+<%- end -%>
+  Target "stop"
+</Chain>
+<%- end -%>

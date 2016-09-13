@@ -2,7 +2,7 @@ class collectd::plugins::java ( ) {
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  file { ['/usr/share/', '/usr/share/collectd/', '/usr/share/collectd/java-collectd-plugin/']:
+  file { ['/usr/share/collectd/java-collectd-plugin/']:
     ensure => directory,
     owner  => root,
     group  => 'root',

@@ -1,4 +1,7 @@
-class collectd::plugins::mongodb ( $modules ) {
+class collectd::plugins::mongodb (
+  $modules,
+  $filter_metrics = false,
+  $filter_metric_rules = {} ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -10,22 +13,18 @@ class collectd::plugins::mongodb ( $modules ) {
     }
   }
 
-  package { 'python-pip':
-    ensure => present,
-  }
-
-  exec { 'install dependencies':
+  exec { 'install mongodb dependencies':
     command => 'pip install pymongo==3.0.3',
     require => Package['python-pip']
   }
 
-  file { ['/usr/share/', '/usr/share/collectd/', '/usr/share/collectd/mongodb-collectd-plugin/']:
+  file { ['/usr/share/collectd/mongodb-collectd-plugin/']:
     ensure  => directory,
     owner   => root,
     group   => 'root',
     mode    => '0755',
     before  => File['get mongodb.py'],
-    require => Exec['install dependencies']
+    require => Exec['install mongodb dependencies']
   }
 
   file { 'get mongodb.py':

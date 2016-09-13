@@ -1,4 +1,7 @@
-class collectd::plugins::postgresql ( $databases ) {
+class collectd::plugins::postgresql (
+  $databases,
+  $filter_metrics = false,
+  $filter_metric_rules = {} ) {
   validate_hash($databases)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
