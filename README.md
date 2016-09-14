@@ -322,7 +322,7 @@ The sample output file generated would look like [10-mysql.conf](https://github.
 
 ```nginx
 class { 'collectd::plugins::nginx':
-  'config' => {
+  config => {
     'URL'  => '"http://localhost:80/nginx_status"',
   }
 }
