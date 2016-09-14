@@ -1,3 +1,7 @@
+Release 0.1.7
+  * Add ability to filter on plugin-specific metrics
+  * Add vmstat plugin
+
 Release 0.1.6
   * Add ability to configure plugin-specific reporting intervals
   * Add iostat plugin
