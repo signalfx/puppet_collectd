@@ -1,6 +1,9 @@
 Release 0.1.7
   * Add ability to filter on plugin-specific metrics
   * Add vmstat plugin
+  * Change nginx plugin usage
+  * Update docker plugin to v1.0.0 release
+  * Update elatsicsearch plugin and configuration to 1.2.0 release.
 
 Release 0.1.6
   * Add ability to configure plugin-specific reporting intervals
