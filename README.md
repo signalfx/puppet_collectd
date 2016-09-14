@@ -192,7 +192,8 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
  13. [RabbitMQ](#class-collectdpluginrabbitmq)
  14. [Redis](#class-collectdpluginredis)
  15. [Varnish](#class-collectdpluginvarnish)
- 16. [Zookeeper](#class-collectdpluginzookeeper)
+ 16. [Vmstat](#class-collectdpluginvmstat)
+ 17. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -571,6 +572,21 @@ class { 'collectd::plugins::varnish' :
 ```
 
 See [collectd-varnish](https://github.com/signalfx/integrations/tree/master/collectd-varnish) for configurable parameters. 
+
+####Class: `collectd::plugin::vmstat`
+
+```puppet
+class { 'collectd::plugins::vmstat':
+  modules => {
+    'vmstat_collectd' => {
+        'Path' => '"/usr/bin/vmstat"',
+        'Verbose' => false,
+        'Include' => '["r", "b", "swpd", "free", "buff", "cache", "inact", "active", "si", "so", "bi", "bo", "in", "cs", "us", "sy", "id", "wa", "st"]'
+    }
+  }
+}
+```
+See [collectd-vmstat](https://github.com/signalfx/integrations/tree/master/collectd-vmstat) for configurable parameters. 
 
 ####Class: `collectd::plugin::zookeeper`
 
