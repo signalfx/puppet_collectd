@@ -288,7 +288,7 @@ class { 'collectd::plugins::elasticsearch':
         'Verbose'              => false,
         'Cluster'              => '"elasticsearch"',
         'Indexes'              => '["_all"]',
-        'EnableIndexStats'     => false,
+        'EnableIndexStats'     => true,
         'EnableClusterHealth'  => true,
         'Interval'             => 10,
         'IndexInterval'        => 300,
