@@ -1,3 +1,6 @@
+Release 0.1.9
+  * Fix for vmstat plugin to support RHEL
+
 Release 0.1.7
   * Add ability to filter on plugin-specific metrics
   * Add vmstat plugin
