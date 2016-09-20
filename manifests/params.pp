@@ -52,13 +52,11 @@ class collectd::params {
 
         case $::operatingsystem {
                 'Ubuntu':{
-                    $update_system = 'apt-get update -y'
                     $signalfx_public_keyid = 'C94EDC608899B00511CCBA4D68EA6297FE128AB0' # public key to repository hosted on launchpad
                     $signalfx_collectd_repo_source  = 'ppa:signalfx/collectd-release'
                     $signalfx_plugin_repo_source    = 'ppa:signalfx/collectd-plugin-release'
                 }
                 'Debian':{
-                    $update_system = 'apt-get update -y'
                     case $::operatingsystemmajrelease {
                         '7': {
                               $signalfx_public_keyid          = '91668001288D1C6D2885D651185894C15AE495F6' # public key to repository hosted on AWS S3
@@ -76,7 +74,6 @@ class collectd::params {
                     }
                 }
                 'RedHat', 'CentOS': {
-                    $update_system = 'yum -y update'
                     $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
                     $signalfx_plugin_repo_filename = '/etc/yum.repos.d/SignalFx-collectd_plugin-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
                     case $::operatingsystemmajrelease {
@@ -96,7 +93,6 @@ class collectd::params {
                     }
                 }
                 'Amazon': {
-                        $update_system = 'echo print_dummy_yum_update' # do not update amazon os
                         $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-AWS_EC2_Linux-release.repo' # file created in /etc/yum.repos.d
                         $signalfx_plugin_repo_filename = '/etc/yum.repos.d/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release.repo' # file created in /etc/yum.repos.d
                         $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'

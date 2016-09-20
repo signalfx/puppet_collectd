@@ -45,11 +45,6 @@ class collectd (
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   collectd::check_os_compatibility { $title:
   } ->
-  # run this only on first run to update the sources
-  exec { 'update_system':
-    command => $collectd::params::update_system,
-    unless  => 'which collectd'
-  } ->
   anchor { 'collectd::begin': } ->
     class { '::collectd::get_signalfx_repository': } ->
     class { '::collectd::install': } ->
