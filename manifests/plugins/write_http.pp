@@ -1,4 +1,3 @@
-# write_http plugin
 class collectd::plugins::write_http(
   $dimension_list                    = $collectd::dimension_list,
   $aws_integration                   = $collectd::aws_integration,

@@ -1,4 +1,3 @@
-# signalfx plugin
 class collectd::plugins::signalfx(
   $ensure_signalfx_plugin_version           = $collectd::ensure_signalfx_plugin_version,
   $signalfx_plugin_repo_source              = $collectd::signalfx_plugin_repo_source,
@@ -22,10 +21,14 @@ class collectd::plugins::signalfx(
   collectd::check_and_install_package { 'signalfx-collectd-plugin':
     before  => File['load Signalfx plugin']
   }
+
+  # The collectd-python plugin is bundled in the SignalFx Collectd Package
+  # for deb based builds, but not for rpm.
   if $::osfamily == 'Redhat' {
-    collectd::check_and_install_package { $title:
-      package_name => 'collectd-python',
-      before       => File['load Signalfx plugin']
+    collectd::check_and_install_package { 'signalfx':
+      package_name    => 'collectd-python',
+      package_version => $ensure_signalfx_plugin_version,
+      before          => File['load Signalfx plugin']
     }
   }
 

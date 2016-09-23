@@ -3,3 +3,6 @@ Gemfile.lock
 **/.DS_Store
 .idea/
 *.iml
+
+# Generated test files
+collectd.json

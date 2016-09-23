@@ -9,7 +9,7 @@ class collectd::config inherits collectd {
 
   if $::operatingsystem == 'CentOS' and $::operatingsystemmajrelease == '7' {
     $log_file = 'stdout'
-  }else {
+  } else {
     file { $collectd::log_file:
       ensure => present,
       before => File[$collectd::params::collectd_config_file]
