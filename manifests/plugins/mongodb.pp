@@ -2,6 +2,7 @@ class collectd::plugins::mongodb (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/mongodb/10-mongodb.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -43,8 +44,8 @@ class collectd::plugins::mongodb (
   }
 
   collectd::plugins::plugin_common { 'mongodb':
-    package_name         => 'collectd-mongodb',
-    plugin_file_name     => '10-mongodb.conf',
-    plugin_template_name => 'mongodb/10-mongodb.conf.erb',
+    package_name     => 'collectd-mongodb',
+    plugin_file_name => '10-mongodb.conf',
+    plugin_template  => $plugin_template,
   }
 }

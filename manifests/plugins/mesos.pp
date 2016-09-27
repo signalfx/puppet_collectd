@@ -2,6 +2,7 @@ class collectd::plugins::mesos (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/mesos/10-mesos-master.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -37,7 +38,7 @@ class collectd::plugins::mesos (
   }
 
   collectd::plugins::plugin_common { 'mesos':
-    plugin_file_name     => '10-mesos-master.conf',
-    plugin_template_name => 'mesos/10-mesos-master.conf.erb',
+    plugin_file_name => '10-mesos-master.conf',
+    plugin_template  => $plugin_template,
   }
 }

@@ -2,6 +2,7 @@ class collectd::plugins::redis (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/redis/10-redis_master.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -26,8 +27,8 @@ class collectd::plugins::redis (
   }
 
   collectd::plugins::plugin_common { 'redis':
-    package_name         => 'collectd-python',
-    plugin_file_name     => '10-redis_master.conf',
-    plugin_template_name => 'redis/10-redis_master.conf.erb',
+    package_name     => 'collectd-python',
+    plugin_file_name => '10-redis_master.conf',
+    plugin_template  => $plugin_template,
   }
 }

@@ -2,6 +2,7 @@ class collectd::plugins::iostat (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/iostat/10-iostat.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -38,8 +39,8 @@ class collectd::plugins::iostat (
   }
 
   collectd::plugins::plugin_common { 'iostat':
-    package_name         => 'collectd-python',
-    plugin_file_name     => '10-iostat.conf',
-    plugin_template_name => 'iostat/10-iostat.conf.erb',
+    package_name     => 'collectd-python',
+    plugin_file_name => '10-iostat.conf',
+    plugin_template  => $plugin_template,
   }
 }

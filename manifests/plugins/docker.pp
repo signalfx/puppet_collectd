@@ -2,6 +2,7 @@ class collectd::plugins::docker (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/docker/10-docker.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -54,8 +55,8 @@ class collectd::plugins::docker (
   }
 
   collectd::plugins::plugin_common { 'docker':
-    package_name         => 'collectd-docker',
-    plugin_file_name     => '10-docker.conf',
-    plugin_template_name => 'docker/10-docker.conf.erb',
+    package_name     => 'collectd-docker',
+    plugin_file_name => '10-docker.conf',
+    plugin_template  => $plugin_template,
   }
 }
