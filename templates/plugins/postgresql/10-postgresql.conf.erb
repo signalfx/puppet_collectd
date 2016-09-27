@@ -16,9 +16,9 @@ LoadPlugin postgresql
         </Result>
     </Query>
 
-    <%- @databases.each do |database_instance, database_config| -%>
-    <Database "<%= database_instance %>">
-    <%- database_config.each do |key,value| -%>
+    <%- @modules.each do |module_instance, module_config| -%>
+    <Database "<%= module_instance %>">
+    <%- module_config.each do |key,value| -%>
         <%- if key == 'queries' -%>
 
         <%- value.each do |queryname| -%>
