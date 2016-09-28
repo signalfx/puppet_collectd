@@ -1,3 +1,6 @@
+Release 0.1.10
+  * Allow setting github repo revision to pull from in get_from_github
+
 Release 0.1.9
   * Fix for vmstat plugin to support RHEL
 
