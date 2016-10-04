@@ -13,6 +13,10 @@ class collectd::plugins::mongodb (
     }
   }
 
+  package { 'python-pip':
+    ensure => present,
+  }
+
   exec { 'install mongodb dependencies':
     command => 'pip install pymongo==3.0.3',
     require => Package['python-pip']
