@@ -57,13 +57,6 @@ describe 'collectd' do
     end
 
     it {
-      is_expected.to contain_exec('update_system').with({
-        'command' => 'yum -y update',
-        'unless'  => 'which collectd',
-      })
-    }
-
-    it {
       is_expected.to contain_package('SignalFx-collectd-RPMs-centos-7-release').with({
         'ensure' => 'absent',
       })
