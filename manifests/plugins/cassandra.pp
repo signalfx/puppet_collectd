@@ -1,5 +1,7 @@
-class collectd::plugins::cassandra ( $connections ) {
-  validate_hash($connections)
+class collectd::plugins::cassandra (
+  $modules,
+) {
+  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
   include collectd::plugins::java

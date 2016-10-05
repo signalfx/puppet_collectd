@@ -110,7 +110,7 @@ The following example filters the metrics sent from the mysql plugin for all typ
 
 ```puppet
 class { 'collectd::plugins::mysql' :
-  databases => {
+  modules => {
     'mydb_plugin_instance' => {
       'Host' => '"localhost"',
       'User' => '"admin"',
@@ -200,7 +200,7 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
 
 ```puppet
 class { 'collectd::plugins::apache':
-  instances => {
+  modules => {
     'myinstance' => {
         'URL' => '"http://localhost/mod_status?auto"',
     }
@@ -208,13 +208,13 @@ class { 'collectd::plugins::apache':
 }
 ```
 
-See [collectd-apache](https://github.com/signalfx/integrations/tree/master/collectd-apache) for configurable parameters and apache configuration instructions. 
+See [collectd-apache](https://github.com/signalfx/integrations/tree/master/collectd-apache) for configurable parameters and apache configuration instructions.
 
 ####Class: `collectd::plugin::cassandra`
 
 ```puppet
 class { 'collectd::plugins::cassandra' :
-  connections => {
+  modules => {
     'connection1' => {
       'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7199/jmxrmi"',
       'Host' => '"testcassandraserver[hostHasService=cassandra]"',
@@ -245,7 +245,7 @@ class { 'collectd::plugins::cassandra' :
 }
 ```
 
-See [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/collectd-cassandra) for configurable parameters. 
+See [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/collectd-cassandra) for configurable parameters.
 
 ####Class: `collectd::plugin::docker`
 
@@ -277,7 +277,7 @@ class { 'collectd::plugins::docker':
 }
 ```
 
-See [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) for configurable parameters. 
+See [collectd-docker](https://github.com/signalfx/integrations/tree/master/collectd-docker) for configurable parameters.
 
 ####Class: `collectd::plugin::elasticsearch`
 
@@ -299,14 +299,14 @@ class { 'collectd::plugins::elasticsearch':
   }
 }
 ```
-See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters. 
+See [collectd-elasticsearch](https://github.com/signalfx/collectd-elasticsearch) for configurable parameters.
 The sample output file generated would look like [20-elasticsearch.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/20-elasticsearch.conf). Currently, the plugin only monitors one elasticsearch instance, so you should include only one module in the above class arguments.
 
 ####Class: `collectd::plugin::kafka`
 
 ```puppet
 class { 'collectd::plugins::kafka' :
-  connections => {
+  modules => {
     'connection1' => {
       'ServiceURL' => '"service:jmx:rmi:///jndi/rmi://localhost:7099/jmxrmi"',
       'Host' => '"testkafkaserver[hostHasService=kafka]"',
@@ -333,7 +333,7 @@ class { 'collectd::plugins::kafka' :
 }
 ```
 
-See [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) for configurable parameters. 
+See [collectd-kafka](https://github.com/signalfx/integrations/tree/master/collectd-kafka) for configurable parameters.
 
 ####Class: `collectd::plugin::iostat`
 
@@ -348,7 +348,7 @@ class { 'collectd::plugins::iostat':
   }
 }
 ```
-See [collectd-iostat](https://github.com/signalfx/integrations/tree/master/collectd-iostat) for configurable parameters. 
+See [collectd-iostat](https://github.com/signalfx/integrations/tree/master/collectd-iostat) for configurable parameters.
 
 ####Class: `collectd::plugin::memcached`
 
@@ -363,7 +363,7 @@ class { 'collectd::plugins::memcached':
 }
 ```
 
-See [collectd-memcached](https://github.com/signalfx/integrations/tree/master/collectd-memcached) for configurable parameters and memcached configuration instructions. 
+See [collectd-memcached](https://github.com/signalfx/integrations/tree/master/collectd-memcached) for configurable parameters and memcached configuration instructions.
 
 ####Class: `collectd::plugin::mesos`
 
@@ -381,7 +381,7 @@ class { 'collectd::plugins::mesos' :
   }
 }
 ```
-See [collectd-mesos](https://github.com/signalfx/integrations/tree/master/collectd-mesos) for configurable parameters. 
+See [collectd-mesos](https://github.com/signalfx/integrations/tree/master/collectd-mesos) for configurable parameters.
 
 ####Class: `collectd::plugin::mongodb`
 
@@ -403,13 +403,13 @@ class { 'collectd::plugins::mongodb' :
   }
 }
 ```
-See [collectd-mongodb](https://github.com/signalfx/integrations/tree/master/collectd-mongodb) for configurable parameters. 
+See [collectd-mongodb](https://github.com/signalfx/integrations/tree/master/collectd-mongodb) for configurable parameters.
 
 ####Class: `collectd::plugin::mysql`
 
 ```puppet
 class { 'collectd::plugins::mysql' :
-  databases => {
+  modules => {
     'mydb_plugin_instance' => {
       'Host' => '"localhost"',
       'User' => '"admin"',
@@ -421,7 +421,7 @@ class { 'collectd::plugins::mysql' :
 }
 ```
 
-See [collectd.conf](https://collectd.org/documentation/manpages/collectd.conf.5.shtml) for configurable parameters. 
+See [collectd.conf](https://collectd.org/documentation/manpages/collectd.conf.5.shtml) for configurable parameters.
 The sample output file generated would look like [10-mysql.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-mysql.conf)
 
 ####Class: `collectd::plugin::nginx`
@@ -436,13 +436,13 @@ class { 'collectd::plugins::nginx':
 }
 ```
 
-See [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) for configurable parameters and nginx configuration instructions. 
+See [collectd-nginx](https://github.com/signalfx/integrations/tree/master/collectd-nginx) for configurable parameters and nginx configuration instructions.
 
 ####Class: `collectd::plugin::postgresql`
 
 ```puppet
 class { 'collectd::plugins::postgresql' :
-  databases => {
+  modules => {
     'database1' => {
       'Host' => '"127.0.0.1"',
       'User' => '"postgres"',
@@ -466,7 +466,7 @@ class { 'collectd::plugins::postgresql' :
 }
 ```
 
-See [collectd-postgresql](https://github.com/signalfx/integrations/tree/master/collectd-postgresql) for configurable parameters. 
+See [collectd-postgresql](https://github.com/signalfx/integrations/tree/master/collectd-postgresql) for configurable parameters.
 
 ####Class: `collectd::plugin::rabbitmq`
 
@@ -489,7 +489,7 @@ class { 'collectd::plugins::rabbitmq' :
 }
 ```
 
-See [collectd-rabbitmq](https://github.com/signalfx/collectd-rabbitmq) for configurable parameters. 
+See [collectd-rabbitmq](https://github.com/signalfx/collectd-rabbitmq) for configurable parameters.
 The sample output file generated would look like [10-rabbitmq.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-rabbitmq.conf). Currently, the plugin only monitors one rabbitmq instance, so you should include only one module in the above class arguments.
 
 ####Class: `collectd::plugin::redis`
@@ -539,7 +539,7 @@ class { 'collectd::plugins::redis' :
 }
 ```
 
-See [redis-collectd-plugin](https://github.com/signalfx/redis-collectd-plugin) for configurable parameters. 
+See [redis-collectd-plugin](https://github.com/signalfx/redis-collectd-plugin) for configurable parameters.
 The sample output file generated would look like [10-redis_master.conf](https://github.com/signalfx/signalfx-collectd-configs/blob/master/managed_config/10-redis_master.conf)
 
 ####Class: `collectd::plugin::varnish`
@@ -571,7 +571,7 @@ class { 'collectd::plugins::varnish' :
 }
 ```
 
-See [collectd-varnish](https://github.com/signalfx/integrations/tree/master/collectd-varnish) for configurable parameters. 
+See [collectd-varnish](https://github.com/signalfx/integrations/tree/master/collectd-varnish) for configurable parameters.
 
 ####Class: `collectd::plugin::vmstat`
 
@@ -586,7 +586,7 @@ class { 'collectd::plugins::vmstat':
   }
 }
 ```
-See [collectd-vmstat](https://github.com/signalfx/integrations/tree/master/collectd-vmstat) for configurable parameters. 
+See [collectd-vmstat](https://github.com/signalfx/integrations/tree/master/collectd-vmstat) for configurable parameters.
 
 ####Class: `collectd::plugin::zookeeper`
 
@@ -600,7 +600,7 @@ class { 'collectd::plugins::zookeeper' :
   }
 }
 ```
-See [collectd-zookeeper](https://github.com/signalfx/integrations/tree/master/collectd-zookeeper) for configurable parameters. 
+See [collectd-zookeeper](https://github.com/signalfx/integrations/tree/master/collectd-zookeeper) for configurable parameters.
 
 ## Supported Platforms
 

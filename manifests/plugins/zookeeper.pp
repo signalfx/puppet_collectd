@@ -1,7 +1,8 @@
 class collectd::plugins::zookeeper (
   $modules,
   $filter_metrics = false,
-  $filter_metric_rules = {} ) {
+  $filter_metric_rules = {},
+) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd

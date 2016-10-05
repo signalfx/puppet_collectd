@@ -1,5 +1,7 @@
-class collectd::plugins::kafka ( $connections ) {
-  validate_hash($connections)
+class collectd::plugins::kafka (
+  $modules,
+) {
+  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
   include collectd::plugins::java
