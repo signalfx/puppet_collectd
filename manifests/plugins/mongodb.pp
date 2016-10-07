@@ -44,7 +44,7 @@ class collectd::plugins::mongodb (
   }
 
   collectd::plugins::plugin_common { 'mongodb':
-    package_name     => 'collectd-mongodb',
+    package_name     => 'collectd-python',
     plugin_file_name => '10-mongodb.conf',
     plugin_template  => $plugin_template,
   }
