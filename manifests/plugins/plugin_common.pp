@@ -2,9 +2,11 @@
 #
 define collectd::plugins::plugin_common (
   $plugin_file_name,
-  $plugin_template_name,
+  $plugin_template,
   $package_name = 'UNSET'
 ){
+  validate_string($plugin_file_name)
+  validate_string($plugin_template)
 
   if $::osfamily == 'RedHat' and $package_name != 'UNSET' {
     collectd::check_and_install_package { "${package_name} for ${plugin_file_name}":
@@ -19,7 +21,7 @@ define collectd::plugins::plugin_common (
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
-    content => template("collectd/plugins/${plugin_template_name}"),
+    content => template($plugin_template),
     notify  => Service['collectd'],
     require => Class['collectd::config']
   }

@@ -2,6 +2,7 @@ class collectd::plugins::zookeeper (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/zookeeper/20-zookeeper.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -26,8 +27,8 @@ class collectd::plugins::zookeeper (
   }
 
   collectd::plugins::plugin_common { 'zookeeper':
-    package_name         => 'collectd-zookeeper',
-    plugin_file_name     => '20-zookeeper.conf',
-    plugin_template_name => 'zookeeper/20-zookeeper.conf.erb',
+    package_name     => 'collectd-zookeeper',
+    plugin_file_name => '20-zookeeper.conf',
+    plugin_template  => $plugin_template,
   }
 }

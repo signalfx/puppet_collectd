@@ -2,6 +2,7 @@ class collectd::plugins::elasticsearch (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
+  $plugin_template = 'collectd/plugins/elasticsearch/20-elasticsearch.conf.erb',
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -26,8 +27,8 @@ class collectd::plugins::elasticsearch (
   }
 
   collectd::plugins::plugin_common { 'elasticsearch':
-    package_name         => 'collectd-python',
-    plugin_file_name     => '20-elasticsearch.conf',
-    plugin_template_name => 'elasticsearch/20-elasticsearch.conf.erb',
+    package_name     => 'collectd-python',
+    plugin_file_name => '20-elasticsearch.conf',
+    plugin_template  => $plugin_template,
   }
 }

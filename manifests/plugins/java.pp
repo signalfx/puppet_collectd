@@ -1,4 +1,6 @@
-class collectd::plugins::java ( ) {
+class collectd::plugins::java (
+  $plugin_template = 'collectd/plugins/java/10-jmx.conf.erb',
+) {
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
@@ -21,8 +23,8 @@ class collectd::plugins::java ( ) {
   }
 
   collectd::plugins::plugin_common { 'java':
-    package_name         => 'collectd-java',
-    plugin_file_name     => '10-jmx.conf',
-    plugin_template_name => 'java/10-jmx.conf.erb',
+    package_name     => 'collectd-java',
+    plugin_file_name => '10-jmx.conf',
+    plugin_template  => $plugin_template,
   }
 }
