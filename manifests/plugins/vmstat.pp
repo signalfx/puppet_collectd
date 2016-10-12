@@ -3,6 +3,9 @@ class collectd::plugins::vmstat (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/vmstat/10-vmstat.conf.erb',
+  $package_name = 'collectd-python',
+  $package_ensure = present,
+  $package_required = false
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -39,7 +42,9 @@ class collectd::plugins::vmstat (
   }
 
   collectd::plugins::plugin_common { 'vmstat':
-    package_name     => 'collectd-python',
+    package_name     => $package_name,
+    package_ensure   => $package_ensure,
+    package_required => $package_required,
     plugin_file_name => '10-vmstat.conf',
     plugin_template  => $plugin_template,
   }

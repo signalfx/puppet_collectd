@@ -1,5 +1,8 @@
 class collectd::plugins::java (
   $plugin_template = 'collectd/plugins/java/10-jmx.conf.erb',
+  $package_name = 'collectd-java',
+  $package_ensure = present,
+  $package_required = ($::osfamily == 'RedHat')
 ) {
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
@@ -23,7 +26,9 @@ class collectd::plugins::java (
   }
 
   collectd::plugins::plugin_common { 'java':
-    package_name     => 'collectd-java',
+    package_name     => $package_name,
+    package_ensure   => $package_ensure,
+    package_required => $package_required,
     plugin_file_name => '10-jmx.conf',
     plugin_template  => $plugin_template,
   }
