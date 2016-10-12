@@ -2,6 +2,7 @@ Release 0.1.10
   * Allow setting github repo revision to pull from in get_from_github
   * Standardize all plugin templates to use modules parameter
   * Introduce ability to set template location
+  * Introduce ability to set package version and use
 
 Release 0.1.9
   * Fix for vmstat plugin to support RHEL

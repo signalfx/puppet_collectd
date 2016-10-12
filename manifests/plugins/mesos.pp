@@ -3,6 +3,9 @@ class collectd::plugins::mesos (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/mesos/10-mesos-master.conf.erb',
+  $package_name = 'collectd-python',
+  $package_ensure = present,
+  $package_required = false
 ) {
   validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
@@ -38,6 +41,9 @@ class collectd::plugins::mesos (
   }
 
   collectd::plugins::plugin_common { 'mesos':
+    package_name     => $package_name,
+    package_ensure   => $package_ensure,
+    package_required => $package_required,
     plugin_file_name => '10-mesos-master.conf',
     plugin_template  => $plugin_template,
   }
