@@ -5,7 +5,7 @@ class collectd::plugins::rabbitmq (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/rabbitmq/rabbitmq.conf.erb',
-  $package_name = 'collectd-python',
+  $package_name = 'collectd-rabbitmq',
   $package_ensure = present,
   $package_required = false
 ) {
