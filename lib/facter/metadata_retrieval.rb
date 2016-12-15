@@ -1,4 +1,5 @@
 require 'net/http'
+require 'net/https'
 uri = URI.parse('http://169.254.169.254/2014-11-05/dynamic/instance-identity/document')
 http = Net::HTTP.new(uri.host, uri.port)
 http.open_timeout = 4
