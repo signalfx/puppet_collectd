@@ -9,7 +9,7 @@ begin
 rescue StandardError
   raise 'Unable to reach AWS metadata'
 end
-unless response.nil? || response.zero?
+unless response.nil? || response == 0
   Facter.add('ec2_instance_identity_document') do
     setcode do
       JSON.parse(response.body).to_json
