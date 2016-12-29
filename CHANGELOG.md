@@ -1,3 +1,8 @@
+Release 0.1.11
+  * Add ability to disable individual default plugins
+  * Add df plugin as custom configurable
+  * Add disk plugin as custom configurable
+
 Release 0.1.10
   * Allow setting github repo revision to pull from in get_from_github
   * Standardize all plugin templates to use modules parameter
