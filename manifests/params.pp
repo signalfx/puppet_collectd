@@ -31,6 +31,16 @@ class collectd::params {
         $signalfx_plugin_cpu_utilization_per_core = true
         $filter_default_metrics                   = false
         $filter_default_metric_rules              = {}
+        $use_default_cpu_plugin                   = true
+        $use_default_cpufreq_plugin               = true
+        $use_default_df_plugin                    = true
+        $use_default_disk_plugin                  = true
+        $use_default_interface_plugin             = true
+        $use_default_load_plugin                  = true
+        $use_default_memory_plugin                = true
+        $use_default_protocols_plugin             = true
+        $use_default_vmem_plugin                  = true
+        $use_default_uptime_plugin                = true
 
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {

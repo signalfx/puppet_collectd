@@ -54,6 +54,16 @@ write_queue_limit_low | WriteQueueLimitLow of the collectd.conf file
 collect_internal_stats | CollectInternalStats of the collectd.conf file
 log_file | The location of log file to be used by collectd
 log_level | The log level to be used by collectd
+use_default_cpu_plugin | Cpu default plugin option. Set to false to disable default cpu plugin
+use_default_cpufreq_plugin | Cpufreq default plugin option. Set to false to disable default cpufreq plugin
+use_default_df_plugin | Df default plugin option. Set to false to disable default df plugin
+use_default_disk_plugin | Disk default plugin option. Set to false to disable default disk plugin
+use_default_interface_plugin | Interface default plugin option. Set to false to disable default interface plugin
+use_default_load_plugin | Load default plugin option. Set to false to disable default load plugin
+use_default_memory_plugin | Memory default plugin option. Set to false to disable default memory plugin
+use_default_protocols_plugin | Protocols default plugin option. Set to false to disable default protocols plugin
+use_default_vmem_plugin | Vmem default plugin option. Set to false to disable default vmem plugin
+use_default_uptime_plugin | Uptime default plugin option. Set to false to disable default uptime plugin
 write_http_timeout | Timeout option of write_http plugin
 write_http_buffersize | BufferSize option of write_http plugin
 write_http_flush_interval | FlushInterval option of write_http plugin
@@ -179,21 +189,23 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
 
  1.  [Apache](#class-collectdpluginapache)
  2.  [Cassandra](#class-collectdplugincassandra)
- 3.  [Docker](#class-collectdplugindocker)
- 4.  [Elasticsearch](#class-collectdpluginelasticsearch)
- 5.  [Kafka](#class-collectdpluginkafka)
- 6.  [Iostat](#class-collectdpluginiostat)
- 7.  [Memcached](#class-collectdpluginmemcached)
- 8.  [Mesos](#class-collectdpluginmesos)
- 9.  [MongoDB](#class-collectdpluginmongodb)
- 10. [MySQL](#class-collectdpluginmysql)
- 11. [Nginx](#class-collectdpluginnginx)
- 12. [Postgresql](#class-collectdpluginpostgresql)
- 13. [RabbitMQ](#class-collectdpluginrabbitmq)
- 14. [Redis](#class-collectdpluginredis)
- 15. [Varnish](#class-collectdpluginvarnish)
- 16. [Vmstat](#class-collectdpluginvmstat)
- 17. [Zookeeper](#class-collectdpluginzookeeper)
+ 3.  [Df](#class-collectdplugindf)
+ 4.  [Disk](#class-collectdplugindisk)
+ 5.  [Docker](#class-collectdplugindocker)
+ 6.  [Elasticsearch](#class-collectdpluginelasticsearch)
+ 7.  [Kafka](#class-collectdpluginkafka)
+ 8.  [Iostat](#class-collectdpluginiostat)
+ 9.  [Memcached](#class-collectdpluginmemcached)
+ 10. [Mesos](#class-collectdpluginmesos)
+ 11. [MongoDB](#class-collectdpluginmongodb)
+ 12. [MySQL](#class-collectdpluginmysql)
+ 13. [Nginx](#class-collectdpluginnginx)
+ 14. [Postgresql](#class-collectdpluginpostgresql)
+ 15. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 16. [Redis](#class-collectdpluginredis)
+ 17. [Varnish](#class-collectdpluginvarnish)
+ 18. [Vmstat](#class-collectdpluginvmstat)
+ 19. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -246,6 +258,42 @@ class { 'collectd::plugins::cassandra' :
 ```
 
 See [collectd-cassandra](https://github.com/signalfx/integrations/tree/master/collectd-cassandra) for configurable parameters.
+
+####Class: `collectd::plugin::df`
+
+__Note:__ This plugin is automatically included with a default configuration. You need to disable the use of the default df plugin before adding this configuration (see use_default_df_plugin in collectd parameters).
+
+```puppet
+class { 'collectd::plugins::df':
+  modules => {
+    'config' => {
+      'ReportInodes'  => 'true',
+      'FSType'  => '"tmpfs"',
+      'FSType'  => '"devtmpfs"',
+      'IgnoreSelected'  => 'true',
+    }
+  }
+}
+```
+
+See [collectd-df](https://github.com/signalfx/integrations/tree/master/collectd-df) for configurable parameters and df configuration instructions.
+
+####Class: `collectd::plugin::disk`
+
+__Note:__ This plugin is automatically included with a default configuration. You need to disable the use of the default disk plugin before adding this configuration (see use_default_disk_plugin in collectd parameters).
+
+```puppet
+class { 'collectd::plugins::disk':
+  modules => {
+    'config' => {
+      'Disk'  => '"sda"',
+      'IgnoreSelected'  => 'false',
+    }
+  }
+}
+```
+
+See [collectd-disk](https://github.com/signalfx/integrations/tree/master/collectd-disk) for configurable parameters and disk configuration instructions.
 
 ####Class: `collectd::plugin::docker`
 

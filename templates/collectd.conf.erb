@@ -58,20 +58,30 @@ LoadPlugin logfile
   <%= key -%> <%= value %>
   <%- end -%>
 </LoadPlugin>
-
 <%- end -%>
 
+<% if @use_default_cpu_plugin %>
 LoadPlugin cpu
-LoadPlugin cpufreq
-LoadPlugin df
+<% end %>
 
+<% if @use_default_cpufreq_plugin %>
+LoadPlugin cpufreq
+<% end %>
+
+<% if @use_default_df_plugin %>
+LoadPlugin df
+<% end %>
+
+<% if @use_default_disk_plugin %>
 LoadPlugin disk
 <Plugin "disk">
   Disk "/^loop\d+$/"
   Disk "/^dm-\d+$/"
   IgnoreSelected "true"
 </Plugin>
+<% end %>
 
+<% if @use_default_interface_plugin %>
 LoadPlugin interface
 <Plugin "interface">
   Interface "/^lo\d*$/"
@@ -80,9 +90,17 @@ LoadPlugin interface
   Interface "/^veth.*$/"
   IgnoreSelected "true"
 </Plugin>
+<% end %>
 
+<% if @use_default_load_plugin %>
 LoadPlugin load
+<% end %>
+
+<% if @use_default_memory_plugin %>
 LoadPlugin memory
+<% end %>
+
+<% if @use_default_protocols_plugin %>
 LoadPlugin protocols
 <Plugin "protocols">
   Value "Icmp:InDestUnreachs"
@@ -96,18 +114,19 @@ LoadPlugin protocols
   Value "/^TcpExt:.*Octets/"
   IgnoreSelected false
 </Plugin>
+<% end %>
 
+<% if @use_default_vmem_plugin %>
 LoadPlugin vmem
 <Plugin vmem>
   Verbose false
 </Plugin>
+<% end %>
 
+<% if @use_default_uptime_plugin %>
 LoadPlugin uptime
+<% end %>
 
-
-
-# Note: You will get warnings on startup if you have no *.conf files.
-#       This is ok: CollectD will still start.
 <% @include_plugin_dirs.each do |folder| -%>
 Include "<%= folder %>/*.conf"
 <% end -%>
