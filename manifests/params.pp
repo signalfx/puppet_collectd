@@ -84,17 +84,17 @@ class collectd::params {
                     }
                 }
                 'RedHat', 'CentOS': {
-                    $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
+                    $signalfx_collectd_repo_filename = '/etc/yum.repos.d/SignalFx-collectd-RPMs-centos-7-release.repo' # file created in /etc/yum.repos.d
                     $signalfx_plugin_repo_filename = '/etc/yum.repos.d/SignalFx-collectd_plugin-RPMs-centos-release.repo' # file created in /etc/yum.repos.d
                     case $::operatingsystemmajrelease {
                         '7': {
                             $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-centos-7-release'
-                            $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-centos-release-latest.noarch.rpm'
+                            $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-centos-7-release-latest.noarch.rpm'
                             $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-centos-release-latest.noarch.rpm'
                         }
                         '6': {
                             $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-centos-6-release'
-                            $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-centos-release-latest.noarch.rpm'
+                            $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-centos-6-release-latest.noarch.rpm'
                             $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-centos-release-latest.noarch.rpm'
                         }
                         default: {
