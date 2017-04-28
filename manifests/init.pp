@@ -6,6 +6,7 @@ class collectd (
     $signalfx_api_token,
     $ensure_signalfx_collectd_version         = present,
     $signalfx_collectd_repo_source            = $collectd::params::signalfx_collectd_repo_source,
+    $manage_service                           = $collectd::params::manage_service,
     # collectd.conf parameters
     $fqdnlookup                               = $collectd::params::fqdnlookup,
     $hostname                                 = $collectd::params::hostname,

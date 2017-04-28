@@ -20,6 +20,7 @@ class collectd::params {
         $aws_integration           = true
         $write_http_log_http_error = true
         $write_http_flush_interval = 10
+        $manage_service            = true
 
         $signalfx_plugin_log_traces               = true
         $signalfx_plugin_interactive              = false
