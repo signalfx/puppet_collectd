@@ -56,15 +56,15 @@ class collectd (
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   collectd::check_os_compatibility { $title:
-  } ->
-  anchor { 'collectd::begin': } ->
-    class { '::collectd::get_signalfx_repository': } ->
-    class { '::collectd::install': } ->
-    class { '::collectd::config': } ->
-    class { '::collectd::plugins::aggregation': } ->
-    class { '::collectd::plugins::write_http': } ->
-    class { '::collectd::plugins::signalfx': } ->
-  anchor { 'collectd::end': }
+  }
+  -> anchor { 'collectd::begin': }
+    -> class { '::collectd::get_signalfx_repository': }
+    -> class { '::collectd::install': }
+    -> class { '::collectd::config': }
+    -> class { '::collectd::plugins::aggregation': }
+    -> class { '::collectd::plugins::write_http': }
+    -> class { '::collectd::plugins::signalfx': }
+  -> anchor { 'collectd::end': }
 
   class { '::collectd::service': }
 }
