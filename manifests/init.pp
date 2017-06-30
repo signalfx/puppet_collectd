@@ -49,20 +49,22 @@ class collectd (
     $signalfx_plugin_cpu_utilization          = $collectd::params::signalfx_plugin_cpu_utilization,
     $signalfx_plugin_cpu_utilization_per_core = $collectd::params::signalfx_plugin_cpu_utilization_per_core,
     $filter_default_metrics                   = $collectd::params::filter_default_metrics,
-    $filter_default_metric_rules              = $collectd::params::filter_default_metric_rules
+    $filter_default_metric_rules              = $collectd::params::filter_default_metric_rules,
+    # Provide or rely on signalfx remote repository
+    $use_signalfx_remote_repo                 = $collectd::use_signalfx_remote_repo,
 )  inherits collectd::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   collectd::check_os_compatibility { $title:
-  } ->
-  anchor { 'collectd::begin': } ->
-    class { '::collectd::get_signalfx_repository': } ->
-    class { '::collectd::install': } ->
-    class { '::collectd::config': } ->
-    class { '::collectd::plugins::aggregation': } ->
-    class { '::collectd::plugins::write_http': } ->
-    class { '::collectd::plugins::signalfx': } ->
-  anchor { 'collectd::end': }
+  }
+  -> anchor { 'collectd::begin': }
+    -> class { '::collectd::get_signalfx_repository': }
+    -> class { '::collectd::install': }
+    -> class { '::collectd::config': }
+    -> class { '::collectd::plugins::aggregation': }
+    -> class { '::collectd::plugins::write_http': }
+    -> class { '::collectd::plugins::signalfx': }
+  -> anchor { 'collectd::end': }
 
   class { '::collectd::service': }
 }
