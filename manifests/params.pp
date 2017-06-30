@@ -42,6 +42,7 @@ class collectd::params {
         $use_default_vmem_plugin                  = true
         $use_default_uptime_plugin                = true
 
+        $use_signalfx_remote_repo = true
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {
           $plugin_config_dir_tree      = ['/etc/collectd/', '/etc/collectd/managed_config', '/etc/collectd/filtering_config']

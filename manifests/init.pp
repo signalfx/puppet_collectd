@@ -49,7 +49,9 @@ class collectd (
     $signalfx_plugin_cpu_utilization          = $collectd::params::signalfx_plugin_cpu_utilization,
     $signalfx_plugin_cpu_utilization_per_core = $collectd::params::signalfx_plugin_cpu_utilization_per_core,
     $filter_default_metrics                   = $collectd::params::filter_default_metrics,
-    $filter_default_metric_rules              = $collectd::params::filter_default_metric_rules
+    $filter_default_metric_rules              = $collectd::params::filter_default_metric_rules,
+    # Provide or rely on signalfx remote repository
+    $use_signalfx_remote_repo                 = $collectd::use_signalfx_remote_repo,
 )  inherits collectd::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }

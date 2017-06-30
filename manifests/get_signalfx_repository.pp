@@ -1,6 +1,7 @@
 # Get signalfx repositories on the system
 #
 class collectd::get_signalfx_repository inherits collectd {
+  if $collectd::use_signalfx_remote_repo {
     if $::osfamily == 'Debian' {
       # Be careful of dependencies here ( -> )
       if $::operatingsystem == 'Ubuntu' {
@@ -40,4 +41,5 @@ class collectd::get_signalfx_repository inherits collectd {
         unless  => "test -s ${collectd::params::signalfx_collectd_repo_filename} && test -s ${collectd::params::signalfx_plugin_repo_filename}"
       }
     }
+  }
 }
