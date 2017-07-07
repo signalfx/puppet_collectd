@@ -36,8 +36,8 @@ class collectd::get_signalfx_repository inherits collectd {
         }
       }
       exec { "Add ${collectd::signalfx_collectd_repo_source}, ${collectd::signalfx_plugin_repo_source}":
-        command => "yum install -y ${collectd::params::signalfx_collectd_repo_source} ${collectd::params::signalfx_plugin_repo_source}",
-        unless  => "test -s ${collectd::params::signalfx_collectd_repo_filename} && test -s ${collectd::params::signalfx_plugin_repo_filename}"
+        command => "yum install -y ${collectd::signalfx_collectd_repo_source} ${collectd::signalfx_plugin_repo_source}",
+        unless  => "test -s ${collectd::signalfx_collectd_repo_filename} && test -s ${collectd::signalfx_plugin_repo_filename}"
       }
     }
 }
