@@ -28,7 +28,7 @@ if aws_integration
         end
 end
 unless dimension_list.empty?
-        dimension_list.each {|key, value| dimensions << "sfxdim_#{key}=#{value}&"}
+    dimension_list.sort_by { |k| k }.each { |key, value| dimensions << "sfxdim_#{key}=#{value}&" }
 end
 dimensions[0...-1]
 end
