@@ -11,6 +11,7 @@ class collectd::plugins::cassandra (
   include collectd::plugins::java
 
   collectd::plugins::plugin_common { 'cassandra':
+    modules          => $modules,
     package_name     => $package_name,
     package_ensure   => $package_ensure,
     package_required => $package_required,

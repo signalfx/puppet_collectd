@@ -10,12 +10,12 @@ class collectd::get_signalfx_repository inherits collectd {
           }
           apt::key { 'SignalFx public key id for collectd':
               id     => $collectd::params::signalfx_public_keyid
-          } ->
-          apt::ppa { [$collectd::signalfx_collectd_repo_source, $collectd::signalfx_plugin_repo_source] :
+          }
+          -> apt::ppa { [$collectd::signalfx_collectd_repo_source, $collectd::signalfx_plugin_repo_source] :
             package_manage => true,
             require        => Package['apt-transport-https']
           }
-        }else {
+        } else {
           # apt module does not support wheezy and jessie
           exec { "Add ${collectd::signalfx_collectd_repo_source}, ${collectd::signalfx_plugin_repo_source}":
               command => "apt-get update &&

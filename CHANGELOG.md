@@ -1,4 +1,5 @@
 Release 0.1.11
+  * Fix for plugin modules configuration
   * Add ability to disable individual default plugins
   * Add df plugin as custom configurable
   * Add disk plugin as custom configurable
