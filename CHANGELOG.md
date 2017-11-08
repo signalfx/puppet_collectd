@@ -1,3 +1,6 @@
+Release 0.1.13
+  * Adding support for Amazon Linux 2016.09, 2017.03, and 2017.09
+
 Release 0.1.12
   * Fix for plugin modules configuration
 
