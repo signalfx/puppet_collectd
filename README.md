@@ -665,5 +665,8 @@ Currently, the supported platforms for this module are:
   10. Amazon Linux 2015.03
   11. Amazon Linux 2015.09
   12. Amazon Linux 2016.03
+  12. Amazon Linux 2016.09
+  12. Amazon Linux 2017.03
+  12. Amazon Linux 2017.09
   13. Debian GNU/Linux 7 (wheezy)
   14. Debian GNU/Linux 8 (jessie)
