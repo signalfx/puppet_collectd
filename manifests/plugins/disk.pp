@@ -2,7 +2,7 @@ class collectd::plugins::disk (
   $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
-  $plugin_template = 'collectd/plugins/df/10-disk.conf.erb',
+  $plugin_template = 'collectd/plugins/disk/10-disk.conf.erb',
   $package_name = 'UNSET',
   $package_ensure = present,
   $package_required = false
