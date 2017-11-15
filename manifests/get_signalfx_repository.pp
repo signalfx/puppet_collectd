@@ -16,7 +16,7 @@ class collectd::get_signalfx_repository inherits collectd {
             require        => Package['apt-transport-https']
           }
         } else {
-          # apt module does not support wheezy and jessie
+          # apt module does not support wheezy, jessie, and stretch
           exec { "Add ${collectd::signalfx_collectd_repo_source}, ${collectd::signalfx_plugin_repo_source}":
               command => "apt-get update &&
                               apt-get install -y apt-transport-https &&
