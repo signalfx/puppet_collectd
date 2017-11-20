@@ -1,3 +1,6 @@
+Release 0.1.15
+  * Supporting Debian Stretch
+
 Release 0.1.14
   * Fixing typo in collectd disk plugin manifest
 
