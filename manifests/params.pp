@@ -78,6 +78,11 @@ class collectd::params {
                               $signalfx_collectd_repo_source  = 'deb https://dl.signalfx.com/debs/collectd/jessie/release /'
                               $signalfx_plugin_repo_source    = 'deb https://dl.signalfx.com/debs/signalfx-collectd-plugin/jessie/release /'
                         }
+                        '9': {
+                              $signalfx_public_keyid          = '91668001288D1C6D2885D651185894C15AE495F6' # public key to repository hosted on AWS S3
+                              $signalfx_collectd_repo_source  = 'deb https://dl.signalfx.com/debs/collectd/stretch/release /'
+                              $signalfx_plugin_repo_source    = 'deb https://dl.signalfx.com/debs/signalfx-collectd-plugin/stretch/release /'
+                        }
                         default: {
                                 fail("Your Debian OS major release : ${::operatingsystemmajrelease} is not supported.")
                         }

@@ -670,3 +670,4 @@ Currently, the supported platforms for this module are:
   12. Amazon Linux 2017.09
   13. Debian GNU/Linux 7 (wheezy)
   14. Debian GNU/Linux 8 (jessie)
+  15. Debian GNU/Linux 9 (stretch)
