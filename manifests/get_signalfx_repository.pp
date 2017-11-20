@@ -17,6 +17,9 @@ class collectd::get_signalfx_repository inherits collectd {
           }
         } else {
           # apt module does not support wheezy, jessie, and stretch
+          if $::operatingsystemmajrelease == '9' {
+              package {'dirmngr': }
+          }
           exec { "Add ${collectd::signalfx_collectd_repo_source}, ${collectd::signalfx_plugin_repo_source}":
               command => "apt-get update &&
                               apt-get install -y apt-transport-https &&
