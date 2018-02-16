@@ -1,3 +1,23 @@
+Release 0.1.16
+  * Installing dirmngr on Debian Stretch so GPG keys get imported right
+
+Release 0.1.15
+  * Supporting Debian Stretch
+
+Release 0.1.14
+  * Fixing typo in collectd disk plugin manifest
+
+Release 0.1.13
+  * Adding support for Amazon Linux 2016.09, 2017.03, and 2017.09
+
+Release 0.1.12
+  * Fix for plugin modules configuration
+
+Release 0.1.11
+  * Add ability to disable individual default plugins
+  * Add df plugin as custom configurable
+  * Add disk plugin as custom configurable
+
 Release 0.1.10
   * Allow setting github repo revision to pull from in get_from_github
   * Standardize all plugin templates to use modules parameter

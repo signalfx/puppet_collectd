@@ -30,10 +30,13 @@ class collectd::plugins::zookeeper (
   }
 
   collectd::plugins::plugin_common { 'zookeeper':
-    package_name     => $package_name,
-    package_ensure   => $package_ensure,
-    package_required => $package_required,
-    plugin_file_name => '20-zookeeper.conf',
-    plugin_template  => $plugin_template,
+    modules             => $modules,
+    filter_metrics      => $filter_metrics,
+    filter_metric_rules => $filter_metric_rules,
+    package_name        => $package_name,
+    package_ensure      => $package_ensure,
+    package_required    => $package_required,
+    plugin_file_name    => '20-zookeeper.conf',
+    plugin_template     => $plugin_template,
   }
 }

@@ -18,6 +18,16 @@ class collectd (
     $log_file                                 = $collectd::params::log_file,
     $log_level                                = $collectd::params::log_level,
     $loadplugins                              = $collectd::params::loadplugins,
+    $use_default_cpu_plugin                   = $collectd::params::use_default_cpu_plugin,
+    $use_default_cpufreq_plugin               = $collectd::params::use_default_cpufreq_plugin,
+    $use_default_df_plugin                    = $collectd::params::use_default_df_plugin,
+    $use_default_disk_plugin                  = $collectd::params::use_default_disk_plugin,
+    $use_default_interface_plugin             = $collectd::params::use_default_interface_plugin,
+    $use_default_load_plugin                  = $collectd::params::use_default_load_plugin,
+    $use_default_memory_plugin                = $collectd::params::use_default_memory_plugin,
+    $use_default_protocols_plugin             = $collectd::params::use_default_protocols_plugin,
+    $use_default_vmem_plugin                  = $collectd::params::use_default_vmem_plugin,
+    $use_default_uptime_plugin                = $collectd::params::use_default_uptime_plugin,
     # write_http parameters
     $dimension_list                           = $collectd::params::dimension_list,
     $aws_integration                          = $collectd::params::aws_integration,
@@ -44,15 +54,15 @@ class collectd (
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   collectd::check_os_compatibility { $title:
-  } ->
-  anchor { 'collectd::begin': } ->
-    class { '::collectd::get_signalfx_repository': } ->
-    class { '::collectd::install': } ->
-    class { '::collectd::config': } ->
-    class { '::collectd::plugins::aggregation': } ->
-    class { '::collectd::plugins::write_http': } ->
-    class { '::collectd::plugins::signalfx': } ->
-  anchor { 'collectd::end': }
+  }
+  -> anchor { 'collectd::begin': }
+  -> class { '::collectd::get_signalfx_repository': }
+  -> class { '::collectd::install': }
+  -> class { '::collectd::config': }
+  -> class { '::collectd::plugins::aggregation': }
+  -> class { '::collectd::plugins::write_http': }
+  -> class { '::collectd::plugins::signalfx': }
+  -> anchor { 'collectd::end': }
 
   class { '::collectd::service': }
 }

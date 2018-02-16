@@ -31,6 +31,16 @@ class collectd::params {
         $signalfx_plugin_cpu_utilization_per_core = true
         $filter_default_metrics                   = false
         $filter_default_metric_rules              = {}
+        $use_default_cpu_plugin                   = true
+        $use_default_cpufreq_plugin               = true
+        $use_default_df_plugin                    = true
+        $use_default_disk_plugin                  = true
+        $use_default_interface_plugin             = true
+        $use_default_load_plugin                  = true
+        $use_default_memory_plugin                = true
+        $use_default_protocols_plugin             = true
+        $use_default_vmem_plugin                  = true
+        $use_default_uptime_plugin                = true
 
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {
@@ -68,6 +78,11 @@ class collectd::params {
                               $signalfx_collectd_repo_source  = 'deb https://dl.signalfx.com/debs/collectd/jessie/release /'
                               $signalfx_plugin_repo_source    = 'deb https://dl.signalfx.com/debs/signalfx-collectd-plugin/jessie/release /'
                         }
+                        '9': {
+                              $signalfx_public_keyid          = '91668001288D1C6D2885D651185894C15AE495F6' # public key to repository hosted on AWS S3
+                              $signalfx_collectd_repo_source  = 'deb https://dl.signalfx.com/debs/collectd/stretch/release /'
+                              $signalfx_plugin_repo_source    = 'deb https://dl.signalfx.com/debs/signalfx-collectd-plugin/stretch/release /'
+                        }
                         default: {
                                 fail("Your Debian OS major release : ${::operatingsystemmajrelease} is not supported.")
                         }
@@ -98,8 +113,8 @@ class collectd::params {
                         $signalfx_collectd_repo_source       = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
                         $signalfx_plugin_repo_source         = 'https://dl.signalfx.com/rpms/SignalFx-rpms/release/SignalFx-collectd_plugin-RPMs-AWS_EC2_Linux-release-latest.noarch.rpm'
                         case $::operatingsystemrelease {
-                            '2016.03': {
-                                # No old_signalfx_collectd_repo_source on 2016.03
+                            '2016.03', '2016.09', '2017.03', '2017.09': {
+                                # No old_signalfx_collectd_repo_source on newer Amazon Linux versions
                             }
                             '2015.09': {
                                 $old_signalfx_collectd_repo_source   = 'SignalFx-collectd-RPMs-AWS_EC2_Linux_2015_09-release'

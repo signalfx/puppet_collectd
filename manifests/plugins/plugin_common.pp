@@ -3,6 +3,9 @@
 define collectd::plugins::plugin_common (
   $plugin_file_name,
   $plugin_template,
+  $modules = undef,
+  $filter_metrics = false,
+  $filter_metric_rules = {},
   $package_name = 'UNSET',
   $package_ensure = present,
   $package_required = false,
