@@ -193,19 +193,20 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
  4.  [Disk](#class-collectdplugindisk)
  5.  [Docker](#class-collectdplugindocker)
  6.  [Elasticsearch](#class-collectdpluginelasticsearch)
- 7.  [Kafka](#class-collectdpluginkafka)
+ 7.  [HAProxy](#class-collectdpluginhaproxy)
  8.  [Iostat](#class-collectdpluginiostat)
- 9.  [Memcached](#class-collectdpluginmemcached)
- 10. [Mesos](#class-collectdpluginmesos)
- 11. [MongoDB](#class-collectdpluginmongodb)
- 12. [MySQL](#class-collectdpluginmysql)
- 13. [Nginx](#class-collectdpluginnginx)
- 14. [Postgresql](#class-collectdpluginpostgresql)
- 15. [RabbitMQ](#class-collectdpluginrabbitmq)
- 16. [Redis](#class-collectdpluginredis)
- 17. [Varnish](#class-collectdpluginvarnish)
- 18. [Vmstat](#class-collectdpluginvmstat)
- 19. [Zookeeper](#class-collectdpluginzookeeper)
+ 9.  [Kafka](#class-collectdpluginkafka)
+ 10.  [Memcached](#class-collectdpluginmemcached)
+ 11. [Mesos](#class-collectdpluginmesos)
+ 12. [MongoDB](#class-collectdpluginmongodb)
+ 13. [MySQL](#class-collectdpluginmysql)
+ 14. [Nginx](#class-collectdpluginnginx)
+ 15. [Postgresql](#class-collectdpluginpostgresql)
+ 16. [RabbitMQ](#class-collectdpluginrabbitmq)
+ 17. [Redis](#class-collectdpluginredis)
+ 18. [Varnish](#class-collectdpluginvarnish)
+ 19. [Vmstat](#class-collectdpluginvmstat)
+ 20. [Zookeeper](#class-collectdpluginzookeeper)
 
 
 ####Class: `collectd::plugin::apache`
@@ -406,6 +407,23 @@ class { 'collectd::plugins::memcached':
     'config' => {
       'Host'  => '"127.0.0.1"',
       'Port'  => '"11211"'
+    }
+  }
+}
+```
+
+
+See [collectd-haproxy](https://github.com/signalfx/integrations/blob/master/collectd-haproxy/10-haproxy.conf) for configurable parameters.
+
+####Class: `collectd::plugin::haproxy`
+
+```puppet
+class { 'collectd::plugins::haproxy':
+  modules => {
+    'config' => {
+      'Socket'  => '\"/var/lib/haproxy/stats\"',
+      'ProxyMonitor'  => ['backend',  'http-in',  'server1'],
+      'ExcludeMetric' => ['session_limit', 'response_1xx'],
     }
   }
 }
