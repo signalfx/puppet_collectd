@@ -12,7 +12,7 @@ class collectd::plugins::haproxy (
   include collectd
 
   collectd::get_from_github { $title:
-    localfolder => '/opt/collectd-haproxy',
+    localfolder => '/usr/share/collectd/collectd-haproxy',
     source      => 'https://github.com/signalfx/collectd-haproxy'
   }
   -> collectd::plugins::plugin_common { 'haproxy':
