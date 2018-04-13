@@ -1,3 +1,6 @@
+Release 0.1.17
+  * Add HAProxy plugin
+
 Release 0.1.16
   * Installing dirmngr on Debian Stretch so GPG keys get imported right
 
