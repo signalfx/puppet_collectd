@@ -196,7 +196,7 @@ You may specify parameters on a per-plugin basis. Please check the notes under e
  7.  [HAProxy](#class-collectdpluginhaproxy)
  8.  [Iostat](#class-collectdpluginiostat)
  9.  [Kafka](#class-collectdpluginkafka)
- 10.  [Memcached](#class-collectdpluginmemcached)
+ 10. [Memcached](#class-collectdpluginmemcached)
  11. [Mesos](#class-collectdpluginmesos)
  12. [MongoDB](#class-collectdpluginmongodb)
  13. [MySQL](#class-collectdpluginmysql)
@@ -421,7 +421,7 @@ See [collectd-haproxy](https://github.com/signalfx/integrations/blob/master/coll
 class { 'collectd::plugins::haproxy':
   modules => {
     'config' => {
-      'Socket'  => '\"/var/lib/haproxy/stats\"',
+      'Socket'  => '/var/lib/haproxy/stats',
       'ProxyMonitor'  => ['backend',  'http-in',  'server1'],
       'ExcludeMetric' => ['session_limit', 'response_1xx'],
     }
