@@ -1,5 +1,6 @@
 class collectd::plugins::haproxy (
   $modules,
+  $version,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/haproxy/haproxy.conf.erb',
@@ -13,7 +14,8 @@ class collectd::plugins::haproxy (
 
   collectd::get_from_github { $title:
     localfolder => '/usr/share/collectd/collectd-haproxy',
-    source      => 'https://github.com/signalfx/collectd-haproxy'
+    source      => 'https://github.com/signalfx/collectd-haproxy',
+    revision    =>  $version
   }
   -> collectd::plugins::plugin_common { 'haproxy':
     modules             => $modules,

@@ -419,6 +419,7 @@ See [collectd-haproxy](https://github.com/signalfx/integrations/blob/master/coll
 
 ```puppet
 class { 'collectd::plugins::haproxy':
+  version => 'v1.0.1',
   modules => {
     'config' => {
       'Socket'  => '/var/lib/haproxy/stats',
