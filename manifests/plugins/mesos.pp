@@ -3,7 +3,7 @@ class collectd::plugins::mesos (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/mesos/10-mesos-master.conf.erb',
-  $package_name = 'collectd-python',
+  $package_name = 'collectd-mesos',
   $package_ensure = present,
   $package_required = false
 ) {
@@ -11,33 +11,35 @@ class collectd::plugins::mesos (
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  file { ['/usr/share/collectd/mesos-collectd-plugin/']:
-    ensure => directory,
-    owner  => root,
-    group  => 'root',
-    mode   => '0755',
-    before => File['get mesos-master.py'],
-  }
+  unless $package_required {
+    file { ['/usr/share/collectd/mesos-collectd-plugin/']:
+      ensure => directory,
+      owner  => root,
+      group  => 'root',
+      mode   => '0755',
+      before => File['get mesos-master.py'],
+    }
 
-  file { 'get mesos-master.py':
-    ensure  => present,
-    replace => 'yes',
-    path    => '/usr/share/collectd/mesos-collectd-plugin/mesos-master.py',
-    owner   => root,
-    group   => 'root',
-    mode    => '0755',
-    content => template('collectd/plugins/mesos/mesos-master.py.erb'),
-    before  => File['get mesos_collectd.py'],
-  }
+    file { 'get mesos-master.py':
+      ensure  => present,
+      replace => 'yes',
+      path    => '/usr/share/collectd/mesos-collectd-plugin/mesos-master.py',
+      owner   => root,
+      group   => 'root',
+      mode    => '0755',
+      content => template('collectd/plugins/mesos/mesos-master.py.erb'),
+      before  => File['get mesos_collectd.py'],
+    }
 
-  file { 'get mesos_collectd.py':
-    ensure  => present,
-    replace => 'yes',
-    path    => '/usr/share/collectd/mesos-collectd-plugin/mesos_collectd.py',
-    owner   => root,
-    group   => 'root',
-    mode    => '0755',
-    content => template('collectd/plugins/mesos/mesos_collectd.py.erb'),
+    file { 'get mesos_collectd.py':
+      ensure  => present,
+      replace => 'yes',
+      path    => '/usr/share/collectd/mesos-collectd-plugin/mesos_collectd.py',
+      owner   => root,
+      group   => 'root',
+      mode    => '0755',
+      content => template('collectd/plugins/mesos/mesos_collectd.py.erb'),
+    }
   }
 
   collectd::plugins::plugin_common { 'mesos':

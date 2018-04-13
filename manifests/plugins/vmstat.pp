@@ -3,7 +3,7 @@ class collectd::plugins::vmstat (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/vmstat/10-vmstat.conf.erb',
-  $package_name = 'collectd-python',
+  $package_name = 'collectd-vmstat',
   $package_ensure = present,
   $package_required = false
 ) {
@@ -11,34 +11,38 @@ class collectd::plugins::vmstat (
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  if $::osfamily == 'RedHat' {
-    exec { 'install epel-release':
-      command => 'yum install -y epel-release',
-      before  => Package['sysstat']
+  unless $package_required {
+    if $::osfamily == 'RedHat' {
+      exec { 'install epel-release':
+        command => 'yum install -y epel-release',
+        before  => Package['sysstat']
+      }
     }
-  }
 
-  package { 'sysstat':
-    ensure => present,
-  }
+    unless(defined(Package['sysstat'])) {
+      package { 'sysstat':
+        ensure => present,
+      }
+    }
 
-  file { ['/usr/share/collectd/vmstat-collectd-plugin/']:
-    ensure => directory,
-    owner  => root,
-    group  => 'root',
-    mode   => '0755',
-    before => File['get vmstat_collectd.py']
-  }
+    file { ['/usr/share/collectd/vmstat-collectd-plugin/']:
+      ensure => directory,
+      owner  => root,
+      group  => 'root',
+      mode   => '0755',
+      before => File['get vmstat_collectd.py']
+    }
 
-  file { 'get vmstat_collectd.py':
-    ensure  => present,
-    replace => 'yes',
-    path    => '/usr/share/collectd/vmstat-collectd-plugin/vmstat_collectd.py',
-    owner   => root,
-    group   => 'root',
-    mode    => '0755',
-    content => template('collectd/plugins/vmstat/vmstat_collectd.py.erb'),
-    require => Package['sysstat']
+    file { 'get vmstat_collectd.py':
+      ensure  => present,
+      replace => 'yes',
+      path    => '/usr/share/collectd/vmstat-collectd-plugin/vmstat_collectd.py',
+      owner   => root,
+      group   => 'root',
+      mode    => '0755',
+      content => template('collectd/plugins/vmstat/vmstat_collectd.py.erb'),
+      require => Package['sysstat']
+    }
   }
 
   collectd::plugins::plugin_common { 'vmstat':

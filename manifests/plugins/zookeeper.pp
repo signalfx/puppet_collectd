@@ -3,7 +3,7 @@ class collectd::plugins::zookeeper (
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/zookeeper/20-zookeeper.conf.erb',
-  $package_name = 'collectd-python',
+  $package_name = 'collectd-zookeeper',
   $package_ensure = present,
   $package_required = false
 ) {
@@ -11,22 +11,24 @@ class collectd::plugins::zookeeper (
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
-  file { ['/usr/share/collectd/zookeeper-collectd-plugin/']:
-    ensure => directory,
-    owner  => root,
-    group  => 'root',
-    mode   => '0755',
-    before => File['get zk-collectd.py'],
-  }
+  unless $package_required {
+    file { ['/usr/share/collectd/zookeeper-collectd-plugin/']:
+      ensure => directory,
+      owner  => root,
+      group  => 'root',
+      mode   => '0755',
+      before => File['get zk-collectd.py'],
+    }
 
-  file { 'get zk-collectd.py':
-    ensure  => present,
-    replace => 'yes',
-    path    => '/usr/share/collectd/zookeeper-collectd-plugin/zk-collectd.py',
-    owner   => root,
-    group   => 'root',
-    mode    => '0755',
-    content => template('collectd/plugins/zookeeper/zk-collectd.py.erb'),
+    file { 'get zk-collectd.py':
+      ensure  => present,
+      replace => 'yes',
+      path    => '/usr/share/collectd/zookeeper-collectd-plugin/zk-collectd.py',
+      owner   => root,
+      group   => 'root',
+      mode    => '0755',
+      content => template('collectd/plugins/zookeeper/zk-collectd.py.erb'),
+    }
   }
 
   collectd::plugins::plugin_common { 'zookeeper':
