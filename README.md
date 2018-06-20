@@ -676,17 +676,20 @@ Currently, the supported platforms for this module are:
   2.  Ubuntu 14.04
   3.  Ubuntu 15.04
   4.  Ubuntu 16.04
-  5.  CentOS 6
-  6.  CentOS 7
-  7.  RHEL 6
-  8.  RHEL 7
-  9.  Amazon Linux 2014.09
-  10. Amazon Linux 2015.03
-  11. Amazon Linux 2015.09
-  12. Amazon Linux 2016.03
-  12. Amazon Linux 2016.09
-  12. Amazon Linux 2017.03
-  12. Amazon Linux 2017.09
-  13. Debian GNU/Linux 7 (wheezy)
-  14. Debian GNU/Linux 8 (jessie)
-  15. Debian GNU/Linux 9 (stretch)
+  5.  Ubuntu 18.04
+  6.  CentOS 6
+  7.  CentOS 7
+  8.  RHEL 6
+  9.  RHEL 7
+  10. Amazon Linux 2014.09
+  11. Amazon Linux 2015.03
+  12. Amazon Linux 2015.09
+  13. Amazon Linux 2016.03
+  14. Amazon Linux 2016.09
+  15. Amazon Linux 2017.03
+  16. Amazon Linux 2017.09
+  17. Amazon Linux 2017.12
+  18. Amazon Linux 2018.03
+  19. Debian GNU/Linux 7 (wheezy)
+  20. Debian GNU/Linux 8 (jessie)
+  21. Debian GNU/Linux 9 (stretch)
