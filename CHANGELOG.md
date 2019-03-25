@@ -1,3 +1,7 @@
+Release 0.1.18
+  * Support for Ubuntu 18.04 and Amazon Linux 2017.12 and 2018.03
+  * Update minimum version of puppetlabs/apt to 2.3.0
+
 Release 0.1.17
   * Add HAProxy plugin
 
