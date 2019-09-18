@@ -12,6 +12,7 @@ class collectd::params {
         $log_file               = '/var/log/signalfx-collectd.log'
         $log_level              = 'info'
         $loadplugins            = {}
+        $module_verbose         = true
         $ensure_signalfx_plugin_version = present
         $dimension_list            = {}
         $signalfx_api_endpoint     = 'https://ingest.signalfx.com/v1/collectd'

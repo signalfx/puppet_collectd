@@ -4,6 +4,7 @@ class collectd::plugins::signalfx(
   $signalfx_plugin_repo_source              = $collectd::signalfx_plugin_repo_source,
   $dimension_list                           = $collectd::dimension_list,
   $aws_integration                          = $collectd::aws_integration,
+  $module_verbose                           = $collectd::module_verbose,
   $signalfx_api_endpoint                    = $collectd::signalfx_api_endpoint,
   $signalfx_plugin_log_traces               = $collectd::signalfx_plugin_log_traces,
   $signalfx_plugin_interactive              = $collectd::signalfx_plugin_interactive,
@@ -17,7 +18,9 @@ class collectd::plugins::signalfx(
 
   $dimensions = get_dimensions($dimension_list, $aws_integration)
   $signalfx_api_endpoint_with_dimensions = "${signalfx_api_endpoint}${dimensions}"
-  notify {"Collectd will transmit metrics to this url: ${signalfx_api_endpoint_with_dimensions}":}
+  if $module_verbose {
+    notify {"Collectd will transmit metrics to this url: ${signalfx_api_endpoint_with_dimensions}":}
+  }
 
   collectd::check_and_install_package { 'signalfx-collectd-plugin':
     before  => File['load Signalfx plugin']

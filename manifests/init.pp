@@ -18,6 +18,7 @@ class collectd (
     $log_file                                 = $collectd::params::log_file,
     $log_level                                = $collectd::params::log_level,
     $loadplugins                              = $collectd::params::loadplugins,
+    $module_verbose                           = $collectd::params::module_verbose,
     $use_default_cpu_plugin                   = $collectd::params::use_default_cpu_plugin,
     $use_default_cpufreq_plugin               = $collectd::params::use_default_cpufreq_plugin,
     $use_default_df_plugin                    = $collectd::params::use_default_df_plugin,

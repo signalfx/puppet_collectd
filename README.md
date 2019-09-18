@@ -54,6 +54,7 @@ write_queue_limit_low | WriteQueueLimitLow of the collectd.conf file
 collect_internal_stats | CollectInternalStats of the collectd.conf file
 log_file | The location of log file to be used by collectd
 log_level | The log level to be used by collectd
+module_verbose | Enable notifications from this plugin. Set to false to disable notifictions.
 use_default_cpu_plugin | Cpu default plugin option. Set to false to disable default cpu plugin
 use_default_cpufreq_plugin | Cpufreq default plugin option. Set to false to disable default cpufreq plugin
 use_default_df_plugin | Df default plugin option. Set to false to disable default df plugin
