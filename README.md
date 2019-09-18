@@ -64,6 +64,7 @@ use_default_memory_plugin | Memory default plugin option. Set to false to disabl
 use_default_protocols_plugin | Protocols default plugin option. Set to false to disable default protocols plugin
 use_default_vmem_plugin | Vmem default plugin option. Set to false to disable default vmem plugin
 use_default_uptime_plugin | Uptime default plugin option. Set to false to disable default uptime plugin
+use_signalfx_remote_repo | Enable dl.signalfx.com repository. If you intend to install packages yourself, Set to false to disable
 write_http_timeout | Timeout option of write_http plugin
 write_http_buffersize | BufferSize option of write_http plugin
 write_http_flush_interval | FlushInterval option of write_http plugin

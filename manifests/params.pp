@@ -41,6 +41,7 @@ class collectd::params {
         $use_default_protocols_plugin             = true
         $use_default_vmem_plugin                  = true
         $use_default_uptime_plugin                = true
+        $use_signalfx_remote_repo                 = true
 
         # Do not change these values, they are here for code reuse
         if $::osfamily == 'Debian' {
