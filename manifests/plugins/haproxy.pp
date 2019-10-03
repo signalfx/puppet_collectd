@@ -1,5 +1,5 @@
 class collectd::plugins::haproxy (
-  $modules,
+  Hash $modules,
   $version,
   $filter_metrics = false,
   $filter_metric_rules = {},
@@ -8,7 +8,6 @@ class collectd::plugins::haproxy (
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
