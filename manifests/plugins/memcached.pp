@@ -1,5 +1,5 @@
 class collectd::plugins::memcached (
-  $modules,
+  Hash $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/memcached/10-memcached.conf.erb',
@@ -7,7 +7,6 @@ class collectd::plugins::memcached (
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 

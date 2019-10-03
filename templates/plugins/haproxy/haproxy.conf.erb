@@ -10,7 +10,7 @@
 
     <% @modules.each do |module_instance, module_config| %>
     <Module "haproxy">
-     <% module_config.each do |key,value| %>
+     <% module_config.sort_by { |k| k }.each do |key,value| -%>
      <% if key == 'ProxyMonitor' %>
      <% value.each do |monitor| %>
      <%= key -%> "<%= monitor %>"

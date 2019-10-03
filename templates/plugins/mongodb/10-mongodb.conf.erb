@@ -6,7 +6,7 @@ LoadPlugin python
     Import "mongodb"
     <%- @modules.each do |module_instance, module_config| -%>
     <Module <%= module_instance %>>
-        <%- module_config.each do |key,value| -%>
+        <%- module_config.sort_by { |k| k }.each do |key,value| -%>
         <%= key -%> <%= value %>
         <%- end -%>
     </Module>
@@ -31,7 +31,7 @@ LoadPlugin match_regex
 <%- @filter_metric_rules.each do |rule_instance, rule| -%>
     <Rule "<%= rule_instance -%>">
       <Match "regex">
-      <%- rule.each do |key,value| -%>
+      <%- rule.sort_by { |k| k }.each do |key,value| -%>
         <%- if key != "Type" -%>
         <%= key -%> "<%= value %>"
 	<%- else -%>

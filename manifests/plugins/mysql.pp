@@ -1,5 +1,5 @@
 class collectd::plugins::mysql (
-  $modules,
+  Hash $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/mysql/mysql.conf.erb',
@@ -7,7 +7,6 @@ class collectd::plugins::mysql (
   $package_ensure = present,
   $package_required = ($::osfamily == 'RedHat')
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 

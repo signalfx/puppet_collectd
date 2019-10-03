@@ -1,5 +1,5 @@
 class collectd::plugins::mesos (
-  $modules,
+  Hash $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/mesos/10-mesos-master.conf.erb',
@@ -7,7 +7,6 @@ class collectd::plugins::mesos (
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 

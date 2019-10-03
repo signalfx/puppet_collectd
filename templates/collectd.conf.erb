@@ -54,7 +54,7 @@ LoadPlugin logfile
 
 <%- @loadplugins.each do |plugin, loadplugin_config| -%>
 <LoadPlugin <%= plugin %>>
-  <%- loadplugin_config.each do |key,value| -%>
+  <%- loadplugin_config.sort_by { |k| k }.each do |key,value| -%>
   <%= key -%> <%= value %>
   <%- end -%>
 </LoadPlugin>

@@ -1,5 +1,5 @@
 class collectd::plugins::iostat (
-  $modules,
+  Hash $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/iostat/10-iostat.conf.erb',
@@ -7,7 +7,6 @@ class collectd::plugins::iostat (
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 

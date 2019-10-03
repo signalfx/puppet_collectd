@@ -1,7 +1,7 @@
 # rabbitmq plugin
 #
 class collectd::plugins::rabbitmq (
-  $modules,
+  Hash $modules,
   $filter_metrics = false,
   $filter_metric_rules = {},
   $plugin_template = 'collectd/plugins/rabbitmq/rabbitmq.conf.erb',
@@ -9,7 +9,6 @@ class collectd::plugins::rabbitmq (
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
   include collectd
 
