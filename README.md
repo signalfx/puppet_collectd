@@ -16,6 +16,8 @@ This Puppet module installs the collectd from [SignalFx](https://github.com/sign
 
 With this module you can also configure collectd plugins (e.g. collectd-rabbitmq, collectd-elasticsearch, collectd-redis, etc.) to send metrics to SignalFx.
 
+>ℹ️&nbsp;&nbsp;SignalFx was acquired by Splunk in October 2019. See [Splunk SignalFx](https://www.splunk.com/en_us/investor-relations/acquisitions/signalfx.html) for more information.
+
 ## Setup
 ```puppet
 puppet module install signalfx/collectd
