@@ -18,6 +18,7 @@ class collectd (
     $log_file                                 = $collectd::params::log_file,
     $log_level                                = $collectd::params::log_level,
     $loadplugins                              = $collectd::params::loadplugins,
+    $module_verbose                           = $collectd::params::module_verbose,
     $use_default_cpu_plugin                   = $collectd::params::use_default_cpu_plugin,
     $use_default_cpufreq_plugin               = $collectd::params::use_default_cpufreq_plugin,
     $use_default_df_plugin                    = $collectd::params::use_default_df_plugin,
@@ -28,6 +29,7 @@ class collectd (
     $use_default_protocols_plugin             = $collectd::params::use_default_protocols_plugin,
     $use_default_vmem_plugin                  = $collectd::params::use_default_vmem_plugin,
     $use_default_uptime_plugin                = $collectd::params::use_default_uptime_plugin,
+    $use_signalfx_remote_repo                 = $collectd::params::use_signalfx_remote_repo,
     # write_http parameters
     $dimension_list                           = $collectd::params::dimension_list,
     $aws_integration                          = $collectd::params::aws_integration,

@@ -1,11 +1,10 @@
 class collectd::plugins::kafka (
-  $modules,
+  Hash $modules,
   $plugin_template = 'collectd/plugins/kafka/20-kafka.conf.erb',
   $package_name = 'UNSET',
   $package_ensure = present,
   $package_required = false
 ) {
-  validate_hash($modules)
   Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
   include collectd
   include collectd::plugins::java

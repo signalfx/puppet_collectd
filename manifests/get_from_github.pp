@@ -1,13 +1,9 @@
 define collectd::get_from_github (
-  $localfolder = undef,
-  $source      = undef,
-  $ensure      = present,
-  $revision    = 'master',
+  Optional[String] $localfolder = undef,
+  Optional[String] $source      = undef,
+  $ensure                       = present,
+  String $revision              = 'master',
 ) {
-  validate_string($source)
-  validate_string($revision)
-  validate_string($localfolder)
-
   unless(defined(Package['git'])) {
     package { 'git':
       ensure => present,
